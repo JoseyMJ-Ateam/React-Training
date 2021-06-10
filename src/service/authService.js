@@ -1,4 +1,4 @@
-import {loginBegins } from '../redux/actions/authAction'
+import {LOGIN_BEGINS} from '../../constants';
 
 
 export const authservice = (payload) => {
@@ -10,7 +10,7 @@ const userLogin =(payload)=>{
     // }
 // console.log(payload,'aaaaaaaaaaaaaaaaaaaaaaa');
 return (dispatch)={
-    dispatch(loginBegins())
+   // dispatch(LOGIN_BEGINS());
 }
 }
 

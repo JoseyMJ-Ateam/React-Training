@@ -3,20 +3,21 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import App from './App';
+import allReducers from './redux/reducers';
 import reportWebVitals from './reportWebVitals';
 
 
-// const store = createStore(allReducers, 
-//   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const store = createStore(allReducers, 
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 ReactDOM.render(
-  //  <Provider store = {store}>
+   <Provider store = {store}>
   
     <React.StrictMode>
       <App />
     </React.StrictMode>,
 
-  //  </Provider>,
+   </Provider>,
   document.getElementById('root')
 );
 

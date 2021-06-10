@@ -1,25 +1,15 @@
-let state ={
+const authReducer = (state = 0, action) => {
+    switch(action.type){
+        case 'INCREMENT':
+            return state + 1;
+        case 'DECREMENT':
+            return state - 1;
 
-isLoading:false
+        default:
+             return state;
 
+    }
 }
 
 
-
-
-export const authReducer=(state,action)=>{
-switch (action.type) {
-    case LOGIN_BEGINS:
-        return {...state,isLoading:true}
-        break;
-
-    default:
-        break;
-}
-
-
-
-
-
-
-}
+export default authReducer;

@@ -1,18 +1,11 @@
 
-import { BrowserRouter, Route } from 'react-router-dom';
-import Dashboard from './Dashboard';
-import Login from './Forms/login';
+import LoginForm from './Forms/loginForm';
 
 function App() {
 
   return (
       <> 
-      <BrowserRouter>
-          <Route exact path="/dashboard">
-            <Dashboard />
-          </Route>
-        <Login />
-      </BrowserRouter>
+      <LoginForm />
       </>   
   );
 }
