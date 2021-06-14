@@ -1,10 +1,22 @@
-const authReducer = (state = 0, action) => {
-    switch(action.type){
-        case 'INCREMENT':
-            return state + 1;
-        case 'DECREMENT':
-            return state - 1;
 
+const initialState = {
+  validUser: false
+}
+
+
+
+const authReducer = (state = initialState, action) => {
+    switch(action.type){
+        case 'LOGIN_SUCCESS':
+            return {
+                ...state,
+                validUser: true
+            }
+        case 'LOGIN_FAIL' :
+            return {
+                ...state,
+                validUser: false
+            }
         default:
              return state;
 
