@@ -10,7 +10,7 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
+import GroupIcon from '@material-ui/icons/Group';
 import Users from './users';
 
 const drawerWidth = 240;
@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     width: drawerWidth,
   },
-  // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
@@ -72,7 +71,7 @@ export default function Dashboard() {
         <List>
          
             <ListItem button onClick={()=>setUserClicked(true)}>
-              <ListItemIcon> <InboxIcon /></ListItemIcon>
+              <ListItemIcon> <GroupIcon /></ListItemIcon>
               <ListItemText primary='Users'  />
             </ListItem>
         </List>

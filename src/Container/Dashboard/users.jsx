@@ -9,51 +9,61 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
 const Users = () => {
+    const [loading, setLoading] = React.useState(true);
     const [user, setUser] = React.useState([]);
-    const [page, setPage] = React.useState(2);
+    const [page, setPage] = React.useState(1);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  
-
-    useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/users')
-          .then(res => res.json())
-          .then(response => {
-            setUser(response);
-            // setIsLoading(false);
-          })
-          .catch(error => console.log(error));
-      },[]);
 
       const useStyles = makeStyles({
         table: {
           minWidth: '74vw',
         },
-        tableHead:{
-           
+        tableHead:{           
             fontWeight:600
         }
       });  
 
+      const fetchPage = () => {
+        fetch(`https://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=${rowsPerPage}`)
+          .then(res => res.json())
+          .then(response => {
+            setUser(response);
+            setLoading(false);
+          })
+          .catch(error => console.log(error));
+      }
+      
+    useEffect(() => {
+        fetchPage();
+      },[user]);
+
     const handleChangePage = (event, newPage) => {
-      setPage(newPage);
+      console.log(newPage);
+      setPage(newPage + 1);
+      fetchPage();
     };
   
     const handleChangeRowsPerPage = (event) => {
-      setRowsPerPage(parseInt(event.target.value, 10));
-      setPage(0);
+      console.log(event.target.value);
+      setRowsPerPage(event.target.value, rowsPerPage);
+      setPage(1);
+      fetchPage();
     };
  
-    console.log(user);
+
     const classes = useStyles();
+    if(loading){
+      return <h3>Loading....</h3>
+    }
+
     return (
-        <>
-     
+        <>     
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell className={classes.tableHead}>Name</TableCell>
-            <TableCell className={classes.tableHead}>Email</TableCell>
+            <TableCell className={classes.tableHead}>Id</TableCell>
+            <TableCell className={classes.tableHead}>Title</TableCell>
             <TableCell className={classes.tableHead}>Contact</TableCell>
             <TableCell className={classes.tableHead}>Status</TableCell>
             <TableCell className={classes.tableHead}>Action</TableCell>
@@ -61,26 +71,24 @@ const Users = () => {
         </TableHead>
         <TableBody>
           {user.map((u) => (
-            <TableRow key={u.name}>
-              <TableCell >{u.name}</TableCell>
-              <TableCell>{u.email}</TableCell>
-              <TableCell>{u.phone}</TableCell>
+            <TableRow key={u.id}>
+              <TableCell >{u.id}</TableCell>
+              <TableCell>{u.title}</TableCell>             
             </TableRow>
           ))}
         </TableBody>
       </Table>
-    </TableContainer>
-  
+    </TableContainer>  
          <TablePagination
-        component="div"
-        count={100}
-        page={page}
-        onChangePage={handleChangePage}
-        rowsPerPage={rowsPerPage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
-      />
-        </>
-        
+            rowsPerPageOptions={[5,10,25,50]}
+            component="div"
+            count={100}
+            page={page-1}
+            onChangePage={handleChangePage}
+            rowsPerPage={rowsPerPage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+        />
+        </>        
     );
 }
 export default Users;

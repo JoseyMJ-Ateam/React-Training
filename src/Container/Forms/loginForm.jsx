@@ -8,31 +8,30 @@ import * as authAction from '../../Redux/actions/authAction';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 const useStyles = makeStyles(() => ({
-    ht: {
+    container: {
       direction:"column",
       alignItems:"center",
-      justifyContent:"center",
-    
+      justifyContent:"center"    
     },
-    pg:{
+    cardContainer:{
         width:400,
         height:400,
         boxShadow: "3px 3px 3px 3px #9E9E9E"
-    },  
+      },  
     
-    ctg:{
+    gridItem:{
       marginLeft:50,
       marginRight:50
     },
-    ct: {
+    btn: {
       justifyContent:'center',
       display:'flex' ,
       margin:0,
       position:'absolute',
-      bottom:0,
+      bottom:-25,
       left:150 
     },
-    mt: {
+    formContainer: {
       marginTop:100,
       minHeight:'200px',
       maxHeight: '90vh' ,
@@ -75,11 +74,11 @@ const { actions} =props;
   return (
       <Grid 
         container 
-        className={classes.ht}
+        className={classes.container}
        >
-        <Card className={classes.pg}>
-            <form onSubmit={formik.handleSubmit} className={classes.mt} >
-                <Grid item className={classes.ctg} >
+        <Card className={classes.cardContainer}>
+            <form onSubmit={formik.handleSubmit} className={classes.formContainer} >
+                <Grid item className={classes.gridItem} >
                     <TextField
                     fullWidth
                     id="email"
@@ -91,7 +90,7 @@ const { actions} =props;
                     helperText={formik.touched.email && formik.errors.email}
                     />
                 </Grid>
-                <Grid item className={classes.ctg}>
+                <Grid item className={classes.gridItem}>
                     <TextField
                     fullWidth
                     id="password"
@@ -104,14 +103,14 @@ const { actions} =props;
                     helperText={formik.touched.password && formik.errors.password}
                     />
                 </Grid>
-                <Grid item className={classes.ct}>
+                <Grid item className={classes.btn}>
                     <Button color="primary" variant="contained" type="submit" >
                     Submit
-                    </Button>
-                    <div>
+                    </Button>                   
+                </Grid>
+                <div>
                     {!props.user && logged ? <p className={classes.error}>Invalid Username or Password</p> : null}
                     </div>
-                </Grid>
             </form>
           
         </Card>

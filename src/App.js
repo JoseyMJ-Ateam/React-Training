@@ -28,7 +28,6 @@ function App(props) {
         </Switch>
       </Router>
     
-    
       </>   
   );
 }
@@ -36,8 +35,7 @@ function App(props) {
 const mapStateToProps = state => {
  
   return {
-    user : state.authReducer.validUser
-   
+    user : state.authReducer.validUser   
   }
 }
 export default connect(mapStateToProps)(App);
