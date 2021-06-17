@@ -1,17 +1,12 @@
 
-
-// export const loginBegins =(data) =>{
-//     console.log(data);
-//     return {
-//         type:'LOGIN_BEGINS',
-//         data
-//     }
-// }
-
-export const authAction = (data) => {
-    if(data.email === 'reactdev@ateamindia.com' && data.password === 'Hunt@123'){
+const retrieve  = localStorage.getItem('user');
+export const authAction = (values) => {     
+   
+    if(values.email === 'reactdev@ateamindia.com' && values.password === 'Hunt@123'){
+        localStorage.setItem('user', JSON.stringify(values));
     return {
         type : 'LOGIN_SUCCESS',
+        data: true
     }
     }
 

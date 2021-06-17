@@ -70,7 +70,7 @@ const { actions} =props;
   });
 
   const classes = useStyles();
-
+console.log(props.user)
   return (
       <Grid 
         container 
@@ -122,7 +122,7 @@ const { actions} =props;
 const mapStateToProps = state => {
  
    return {
-     user : state.authReducer.validUser
+     user : state.authReducer.isLogged
     
    }
 }

@@ -1,12 +1,13 @@
-import { makeStyles, TablePagination } from '@material-ui/core';
 import React, {useEffect} from 'react';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import { 
+  makeStyles, 
+  TablePagination, 
+  Table, TableBody, 
+  TableCell, 
+  TableContainer, 
+  TableHead, 
+  TableRow, 
+  Paper } from '@material-ui/core';
 
 const Users = () => {
     const [loading, setLoading] = React.useState(true);
@@ -23,7 +24,7 @@ const Users = () => {
         }
       });  
 
-      const fetchPage = () => {
+      const fetchPage = (page, rowsPerPage) => {
         fetch(`https://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=${rowsPerPage}`)
           .then(res => res.json())
           .then(response => {
@@ -34,20 +35,22 @@ const Users = () => {
       }
       
     useEffect(() => {
-        fetchPage();
-      },[user]);
+      if(user.length===0){
+
+        fetchPage(page, rowsPerPage);
+      }
+      },[page,user]);
 
     const handleChangePage = (event, newPage) => {
-      console.log(newPage);
       setPage(newPage + 1);
-      fetchPage();
+      fetchPage(newPage + 1, rowsPerPage);
     };
   
     const handleChangeRowsPerPage = (event) => {
       console.log(event.target.value);
-      setRowsPerPage(event.target.value, rowsPerPage);
+      setRowsPerPage(event.target.value);
       setPage(1);
-      fetchPage();
+      fetchPage(1,event.target.value);
     };
  
 
