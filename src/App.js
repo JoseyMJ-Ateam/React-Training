@@ -7,8 +7,6 @@ import {
 } from "react-router-dom";
 import {connect} from 'react-redux';
 import MainPage from "./Container/Layouts/MainPage";
-import Users from "./Container/Layouts/SidebarMenus/Dashboard/users";
-import Album from "./Container/Layouts/SidebarMenus/album";
 
 function App(props) {
 
@@ -17,6 +15,7 @@ function App(props) {
       <> 
       <Router>
         <Switch>
+            
           <Route path='/dashboard'>
             {props.user ? <MainPage/> : <Redirect to="/" />}
           </Route> 
@@ -27,8 +26,8 @@ function App(props) {
               <LoginForm />
             )}
           </Route>
-            <Route path = 'dashboard/users' component ={Users} exact />
-            <Route path = 'dashboard/album' component ={Album} exact />
+    
+         
         </Switch>
       </Router>
     

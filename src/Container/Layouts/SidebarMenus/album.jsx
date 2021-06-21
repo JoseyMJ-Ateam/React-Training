@@ -8,7 +8,7 @@ import {
 const Album = () => {
     const [loading, setLoading] = React.useState(true);
     const [album, setAlbum] = React.useState([]);
-    const [obj, setObj]= React.useState([]);
+    const [albumClicked, setAlbumClicked]= React.useState([]);
 
       const useStyles = makeStyles({
         table: {
@@ -40,7 +40,7 @@ const Album = () => {
         },[]); 
 
         const handleCard = (a) => {      
-            setObj(a);            
+            setAlbumClicked(a);            
         }
 
     const classes = useStyles();
@@ -48,14 +48,12 @@ const Album = () => {
       return <h3>Loading....</h3>
     }
 
-    // const objr = obj.map(al => console.log(al.id))
-    console.log(obj.id)
     return (
         <div className={classes.root}>     
            <Grid container spacing={4} >
              {album.map(a => (
                 <Grid key={a.id} item xs={12} md={4} onClick={()=> handleCard(a)}>                
-                  {a.id !== obj.id ?
+                  {a.id !== albumClicked.id ?
                       <img className={classes.img} alt="complex" src={a.url} />                
                   :
                     <div>

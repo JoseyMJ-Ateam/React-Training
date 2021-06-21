@@ -1,25 +1,17 @@
 import React from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { connect } from 'react-redux';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import PersonIcon from '@material-ui/icons/Person';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
   },
   search: {
     position: 'relative',
@@ -35,18 +27,6 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: theme.spacing(3),
       width: 'auto',
     },
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  inputRoot: {
-    color: 'inherit',
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
@@ -75,24 +55,15 @@ const useStyles = makeStyles((theme) => ({
  function PrimarySearchAppBar(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
   const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
   const handleMenuClose = () => {
-    setAnchorEl(null);
     props.onLogOut();
     localStorage.clear();
-    handleMobileMenuClose();
   };
 
 
@@ -105,40 +76,17 @@ const useStyles = makeStyles((theme) => ({
       keepMounted
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={isMenuOpen}
-      onClose={handleMenuClose}
+       onClose={()=>setAnchorEl(null)}
     >
-      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+      <MenuItem onClick={handleMenuClose}><IconButton><ExitToAppIcon /></IconButton>Logout</MenuItem>
+      <MenuItem ><IconButton><PersonIcon /></IconButton>My Profile</MenuItem>
     </Menu>
   );
 
-  const mobileMenuId = 'primary-search-account-menu-mobile';
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  );
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+    
         <Toolbar>     
           <div className={classes.grow} />      
             <IconButton
@@ -152,8 +100,7 @@ const useStyles = makeStyles((theme) => ({
               <AccountCircle />
             </IconButton>    
         </Toolbar>
-      </AppBar>
-      {renderMobileMenu}
+    
       {renderMenu}
     </div>
   );

@@ -1,5 +1,4 @@
 
-const retrieve  = localStorage.getItem('user');
 export const authAction = (values) => {     
    
     if(values.email === 'reactdev@ateamindia.com' && values.password === 'Hunt@123'){

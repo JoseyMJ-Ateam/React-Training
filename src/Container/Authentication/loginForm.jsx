@@ -11,7 +11,8 @@ const useStyles = makeStyles(() => ({
     container: {
       direction:"column",
       alignItems:"center",
-      justifyContent:"center"    
+      justifyContent:"center" ,
+      height:500   
     },
     cardContainer:{
         width:400,

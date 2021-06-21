@@ -7,9 +7,11 @@ import {
   TableContainer, 
   TableHead, 
   TableRow, 
-  Paper } from '@material-ui/core';
+  Paper, 
+  Button} from '@material-ui/core';
+import axios from 'axios';
 
-const Users = () => {
+const Users = (props) => {
     const [loading, setLoading] = React.useState(true);
     const [user, setUser] = React.useState([]);
     const [page, setPage] = React.useState(1);
@@ -39,7 +41,7 @@ const Users = () => {
 
         fetchPage(page, rowsPerPage);
       }
-      },[page,user]);
+      },[page,user,rowsPerPage]);
 
     const handleChangePage = (event, newPage) => {
       setPage(newPage + 1);
@@ -47,13 +49,23 @@ const Users = () => {
     };
   
     const handleChangeRowsPerPage = (event) => {
-      console.log(event.target.value);
       setRowsPerPage(event.target.value);
       setPage(1);
       fetchPage(1,event.target.value);
     };
- 
+ console.log(props)
+    const handleView = (id) => {
+     props.history.push('/dashboard/users/' + id )
+    }
 
+    const handleDelete = (id) => {
+      axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`)
+      .then(response => console.log(response));
+      const deleteUser = user.filter(d => d.id !== id);
+      console.log(deleteUser);
+      setUser(deleteUser)
+
+    }
     const classes = useStyles();
     if(loading){
       return <h3>Loading....</h3>
@@ -67,8 +79,7 @@ const Users = () => {
           <TableRow>
             <TableCell className={classes.tableHead}>Id</TableCell>
             <TableCell className={classes.tableHead}>Title</TableCell>
-            <TableCell className={classes.tableHead}>Contact</TableCell>
-            <TableCell className={classes.tableHead}>Status</TableCell>
+            <TableCell className={classes.tableHead}></TableCell>
             <TableCell className={classes.tableHead}>Action</TableCell>
           </TableRow>
         </TableHead>
@@ -77,6 +88,11 @@ const Users = () => {
             <TableRow key={u.id}>
               <TableCell >{u.id}</TableCell>
               <TableCell>{u.title}</TableCell>             
+              <TableCell><Button style={{backgroundColor:'yellowgreen',color:'white'}}
+              onClick={()=>handleView(u.id)}>View</Button></TableCell>             
+              <TableCell><Button style={{backgroundColor:'orange',color:'white'}}>Edit</Button></TableCell>             
+              <TableCell><Button style={{backgroundColor:'red',color:'white'}}
+              onClick={()=>handleDelete(u.id)}>Delete</Button></TableCell>             
             </TableRow>
           ))}
         </TableBody>

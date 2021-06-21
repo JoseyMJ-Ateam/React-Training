@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import App from './App';
+import UserDetails from './Container/Layouts/SidebarMenus/userDetails';
 import allReducers from './Redux/reducers';
 import reportWebVitals from './reportWebVitals';
 
@@ -13,8 +14,7 @@ const store = createStore(allReducers,
 ReactDOM.render(
    <Provider store = {store}>  
     <React.StrictMode>
-      <App />
-      
+      <App/>    
       
     </React.StrictMode>,
    </Provider>,
