@@ -1,9 +1,15 @@
 
-import {combineReducers} from 'redux';
-import authReducer  from './authReducer';
+import { combineReducers } from 'redux';
+import authReducer from './authReducer';
+import userReducer from './userReducer';
+import albumReducer from './albumReducer';
+import userDetailsReducer from './userDetailsReducer';
 
 const allReducers = combineReducers({
-    authReducer 
+    authReducer,
+    userReducer,
+    albumReducer,
+    userDetailsReducer
 });
 
 export default allReducers;

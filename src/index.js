@@ -1,22 +1,35 @@
+import { ThemeProvider } from '@material-ui/core';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import App from './App';
-import UserDetails from './Container/Layouts/SidebarMenus/userDetails';
 import allReducers from './Redux/reducers';
 import reportWebVitals from './reportWebVitals';
-
+import { createMuiTheme } from '@material-ui/core/styles';
+import { red } from '@material-ui/core/colors';
 
 const store = createStore(allReducers, 
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
+  const theme = createMuiTheme({
+    palette: {
+      primary: {
+        main: red[500],
+      },
+      secondary: {
+        main: '#11cb5f',
+      },
+    },
+  });
+
 ReactDOM.render(
-   <Provider store = {store}>  
+   <Provider store = {store}> 
+   <ThemeProvider theme = {theme}> 
     <React.StrictMode>
-      <App/>    
-      
-    </React.StrictMode>,
+      <App/>       
+    </React.StrictMode>
+    </ThemeProvider>
    </Provider>,
   document.getElementById('root')
 );

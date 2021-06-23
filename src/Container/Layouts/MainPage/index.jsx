@@ -12,16 +12,17 @@ import { AppBar,
         Toolbar,
         makeStyles,
         Typography } from '@material-ui/core';
-import PrimarySearchAppBar from '../MainPage/AppBar';
-import Users from '../SidebarMenus/users';
 import { connect } from 'react-redux';
 import { useHistory, withRouter } from 'react-router-dom';
-import Album from '../SidebarMenus/album';
+import { compose } from 'redux';
+import { Route } from 'react-router-dom';
 import GroupIcon from '@material-ui/icons/Group';
 import MenuIcon from '@material-ui/icons/Menu';
-import { Route } from 'react-router-dom';
-import { compose } from 'redux';
-import UserDetails from '../SidebarMenus/userDetails';
+
+import PrimarySearchAppBar from '../MainPage/AppBar';
+import Users from '../SidebarMenus/Users';
+import Album from '../SidebarMenus/Album';
+import UserDetails from '../SidebarMenus/UserDetails';
 
 const drawerWidth = 240;
 
@@ -139,11 +140,9 @@ function MainPage(props) {
   );
 }
 
-const mapStateToProps = state => {
- 
+const mapStateToProps = state => { 
   return {
-    user : state.authReducer.isLogged
-   
+    user : state.authReducer.isLogged   
   }
 }
 
