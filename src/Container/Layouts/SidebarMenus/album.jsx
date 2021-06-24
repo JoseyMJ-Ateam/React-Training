@@ -11,7 +11,7 @@ import { getAlbumDataBegins, getAlbumDataSuccess } from '../../../Redux/actions/
 const Album = () => {
     const [loading, setLoading] = React.useState(true);
     const [album, setAlbum] = React.useState([]);
-    const [page, setPage] = React.useState(0);
+    const [page, setPage] = React.useState(1);
     const [albumClicked, setAlbumClicked]= React.useState([]);
     const dispatch = useDispatch();
       const useStyles = makeStyles({
@@ -34,30 +34,29 @@ const Album = () => {
 
       const albumData = useSelector(state=>state.albumReducer.album.data);
      console.log(albumData)
-      useEffect(() => {
-        if (album.length === 0) {
-          fetchPages();
-      
-        }
-      }, [album]);
+
+     useEffect(()=>{     
+     fetchPages();
+  } ,[])   
     
      const fetchPages = () => {
+       setPage(page + 1);
       dispatch(getAlbumDataBegins());
       axios.get(`https://jsonplaceholder.typicode.com/photos?_page=${page}&_limit=10`)
       .then(response => {
         dispatch(getAlbumDataSuccess(response))
-        setAlbum([album.concat(response.data)]);
+        setAlbum(album.concat(response.data));
         console.log(album);
-        setLoading(false);
-       
+        setLoading(false);       
       })
-      setPage(page + 1)
+      
     }
         const handleCard = (a) => {      
             setAlbumClicked(a);            
         }
 
     const classes = useStyles();
+
     if(loading){
       return <h3>Loading....</h3>
     }
@@ -65,17 +64,16 @@ const Album = () => {
     return (
         <div className={classes.root}
         >    
-           <Grid container spacing={4} >
            <InfiniteScroll
-           dataLength= {100}
+           dataLength= {album.length}
            next={fetchPages}
            hasMore={true}
-           style={{ display: 'flex', flexDirection: 'column-reverse' }}
            loader={<h4>Loading...</h4>}
           
        >
+           <Grid container spacing={4} >
        
-             {albumData.map(a => (
+             {album.map(a => (
                 <Grid key={a.id} item xs={12} md={4} onClick={()=> handleCard(a)}>                
                   {a.id !== albumClicked.id ?
                       <img className={classes.img} alt="complex" src={a.url} />                
@@ -89,8 +87,8 @@ const Album = () => {
              ))  
 }
   
-             </InfiniteScroll>
            </Grid>
+             </InfiniteScroll>
         
         </div>        
     );

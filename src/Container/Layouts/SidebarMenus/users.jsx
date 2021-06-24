@@ -45,7 +45,7 @@ const Users = (props) => {
       .then(res => res.json())
       .then(response => {
         dispatch(getUserDataSuccess(response))
-        // setUser(response);
+         setUser(response);
         setLoading(false);
       })
       .catch(error => {
@@ -106,7 +106,7 @@ const Users = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {userData.map((u) => (
+            {user.map((u) => (
               <TableRow key={u.id}>
                 <TableCell >{u.id}</TableCell>
                 <TableCell>{u.title}</TableCell>
