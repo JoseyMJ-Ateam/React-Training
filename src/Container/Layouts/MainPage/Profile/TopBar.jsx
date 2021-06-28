@@ -18,6 +18,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
+      color:'black',
+      marginLeft:'10%'
     },
   },
   search: {
@@ -45,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
   },
   inputRoot: {
-    color: 'inherit',
+    color: 'black',
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
@@ -55,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     [theme.breakpoints.up('md')]: {
       width: '20ch',
+      color:'black'
     },
   },
   sectionDesktop: {
@@ -74,14 +77,14 @@ const TopBar = () => {
   const classes = useStyles();
 return(
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar position="static" style={{backgroundColor:'white'}}>
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
-            Material-UI
+            adviser:
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
-              <SearchIcon />
+              <SearchIcon style={{color:'black'}} fontSize='small' />
             </div>
             <InputBase
               placeholder="Search…"
@@ -93,7 +96,7 @@ return(
             />
           </div>
           <div className={classes.grow} />
-          <Button style={{float:'right'}}>Sign Up</Button>          
+          <Button style={{float:'right', borderRadius:'20px'}} variant='outlined'>Sign Up</Button>          
         </Toolbar>
       </AppBar>
     </div>
