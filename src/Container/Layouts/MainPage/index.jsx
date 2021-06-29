@@ -20,9 +20,9 @@ import GroupIcon from '@material-ui/icons/Group';
 import MenuIcon from '@material-ui/icons/Menu';
 
 import PrimarySearchAppBar from '../MainPage/AppBar';
-import Users from '../SidebarMenus/Users';
-import Album from '../SidebarMenus/Album';
-import UserDetails from '../SidebarMenus/UserDetails';
+import Users from '../SidebarMenus/users';
+import Album from '../SidebarMenus/album';
+import UserDetails from '../SidebarMenus/userDetails';
 
 const drawerWidth = 240;
 
