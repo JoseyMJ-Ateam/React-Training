@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import {connect} from 'react-redux';
 import MainPage from "./Container/Layouts/MainPage";
+import Profile from "./Container/Layouts/MainPage/Profile/Profile";
 
 function App(props) {
 
@@ -16,6 +17,7 @@ function App(props) {
       <Router>
         <Switch>
             
+      <Route path='/dashboard/profile' component={Profile} />
           <Route path='/dashboard'>
             {props.user ? <MainPage/> : <Redirect to="/" />}
           </Route> 
@@ -26,7 +28,6 @@ function App(props) {
               <LoginForm />
             )}
           </Route>
-    
          
         </Switch>
       </Router>

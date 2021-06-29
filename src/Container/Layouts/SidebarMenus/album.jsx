@@ -4,7 +4,7 @@ import {
   Grid
 } from '@material-ui/core';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import axios from 'axios';
+import axios from '../../../axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAlbumDataBegins, getAlbumDataSuccess } from '../../../Redux/actions/albumActions';
 
@@ -42,7 +42,7 @@ const Album = () => {
      const fetchPages = () => {
        setPage(page + 1);
       dispatch(getAlbumDataBegins());
-      axios.get(`https://jsonplaceholder.typicode.com/photos?_page=${page}&_limit=10`)
+      axios.get(`photos?_page=${page}&_limit=10`)
       .then(response => {
         dispatch(getAlbumDataSuccess(response))
         setAlbum(album.concat(response.data));

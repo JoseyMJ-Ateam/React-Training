@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../../axios';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { Grid, 
@@ -74,11 +74,10 @@ const UserDetails = (props) => {
   
 useEffect(()=>{
   dispatch(getUserDetailsBegins())
-    fetch('https://jsonplaceholder.typicode.com/posts/' + props.match.params.id)
-      .then(res => res.json())
+    axios.get('posts/' + props.match.params.id)
       .then(response => {
-        dispatch(getUserDetailsSuccess(response))
-        setSelectedUser(response);
+        dispatch(getUserDetailsSuccess(response.data))
+        setSelectedUser(response.data);
         setLoading(false);
       })
       .catch(error =>{
@@ -90,7 +89,7 @@ useEffect(()=>{
 
   const handleUser = (e) => {
     e.preventDefault();
-    axios.put('https://jsonplaceholder.typicode.com/posts/' + props.match.params.id, selectedUser)
+    axios.put('posts/' + props.match.params.id, selectedUser)
     .then(res => {
       dispatch(updateUserDetailsData(res))
     })

@@ -8,6 +8,8 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import { connect } from 'react-redux';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PersonIcon from '@material-ui/icons/Person';
+import { compose } from 'redux';
+import { useHistory, withRouter } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -66,7 +68,10 @@ const useStyles = makeStyles((theme) => ({
     localStorage.clear();
   };
 
-
+  let history = useHistory();
+    const handleProfile = () =>{
+      history.push("/dashboard/profile");
+    }
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -79,7 +84,12 @@ const useStyles = makeStyles((theme) => ({
        onClose={()=>setAnchorEl(null)}
     >
       <MenuItem onClick={handleMenuClose}><IconButton><ExitToAppIcon /></IconButton>Logout</MenuItem>
-      <MenuItem ><IconButton><PersonIcon /></IconButton>My Profile</MenuItem>
+     
+      <MenuItem onClick={handleProfile}>
+      <IconButton><PersonIcon /></IconButton>
+      My Profile
+      </MenuItem>
+      
     </Menu>
   );
 
@@ -112,4 +122,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(PrimarySearchAppBar);
+export default compose(withRouter, connect(null, mapDispatchToProps))(PrimarySearchAppBar);

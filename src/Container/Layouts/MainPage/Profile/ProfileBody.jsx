@@ -48,7 +48,20 @@ const ProfileBody = (theme) => {
           marginBottom:'70px'
         },
         '& .MuiTypography-h5':{
-            fontWeight:'30px'
+            fontWeight:'10px'
+        },
+        calender:{
+          justifyContent:'center',
+          '& .MuiPickersBasePicker-pickerView':{
+            justifyContent:'center',
+            display:'flex',
+            alignItem:'center',
+            maxWidth:'700px'
+          },
+        },
+        centerItems:{
+          display:'flex',
+          justifyContent:'center'
         }
       });
       
@@ -57,21 +70,21 @@ const ProfileBody = (theme) => {
       const classes = useStyles();
 return (
     <Grid container spacing={3} style={{marginTop:20}}>
-      <Grid md={1} />
-      <Grid item md={3} >
-       <ListItem>
+      <Grid sm={1} xs={0}  />
+      <Grid item md={3} xs={12} >
+       <ListItem className={classes.centerItems}>
       <PhoneIcon fontSize='small' color='disabled' style={{marginRight:10}}/>
         <Typography variant='p'>
          +91-98974637862 </Typography>
          <Typography variant='p' color='textSecondary'>(Official)</Typography>
          </ListItem>
-         <ListItem>
+         <ListItem className={classes.centerItems}>
             <PhoneIcon color='disabled' style={{marginRight:10}}/>
               <Typography variant='p'>
               +91-98974637862 </Typography>
               <Typography variant='p' color='textSecondary'>(Mobile)</Typography>
          </ListItem>
-         <ListItem>
+         <ListItem className={classes.centerItems}>
             <IconButton>
                <MailIcon fontSize='small' color='disabled'/>
           </IconButton>  
@@ -83,7 +96,7 @@ return (
          style={{color:'white', borderRadius:20, margin:'20px 0px'}} 
          fullWidth
          startIcon={<ChatIcon />}>Chat</Button>
-         <div style={{display:'flex', marginTop:'20px'}}>
+         <div style={{marginTop:'20px'}} className={classes.centerItems}>
          <Typography variant='h2'>4.5
             </Typography>
             <div style={{display:'flex', flexDirection:'column',marginTop:'10px', marginLeft:'20px'}}>
@@ -99,13 +112,13 @@ return (
             </div>
          </div>        
       </Grid>
-      <Grid item md={4} >   
+      <Grid item md={4} xs={12}>   
           <CardMedia 
           className={classes.cardMedia}
           image={coverPic}
           title='image title' />             
         </Grid>
-        <Grid item md={3}>
+        <Grid item md={3} xs={12}>
         <Card variant="outlined" style={{textAlign:'center', padding:'25px',borderRadius:'10px'}}>
       <CardContent>
         <Typography variant='h5'  className={classes.calText}>
@@ -121,20 +134,22 @@ return (
     </Card>
         </Grid>
 
-        <Grid md={1} />
-        <Grid md={4} />
-<Grid item md={7}>
-<MuiPickersUtilsProvider utils={DateFnsUtils}>
-
+        <Grid md={1} xs={0}/>
+        <Grid md={4} xs={0}/>
+<Grid item md={7} xs={12}>
+<MuiPickersUtilsProvider utils={DateFnsUtils} className={classes.calender}>
+<div className={classes.calender}>
     <KeyboardDatePicker
       label="Material Date Picker"
       variant="static"
       value={selectedDate}
       onChange={handleDateChange}
-    />      
+      
+    />
+    </div>      
       </MuiPickersUtilsProvider>
 </Grid>
-<Grid md={1} />
+<Grid md={1} xs={0}/>
     </Grid>
 )
 }

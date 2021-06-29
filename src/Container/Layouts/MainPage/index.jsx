@@ -133,6 +133,7 @@ function MainPage(props) {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Route path = '/dashboard/album' component ={Album} />  
+         
           <Route path = '/dashboard/users' exact component ={Users} />
         <Route path='/dashboard/users/:id'  component={UserDetails} />
       </main>

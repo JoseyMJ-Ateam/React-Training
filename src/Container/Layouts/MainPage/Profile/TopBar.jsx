@@ -22,6 +22,12 @@ const useStyles = makeStyles((theme) => ({
       marginLeft:'10%'
     },
   },
+  signupBtn:{
+    borderRadius:'20px',
+    [theme.breakpoints.down('xs')]: {
+      width:'150px'
+    },
+  },
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -60,24 +66,12 @@ const useStyles = makeStyles((theme) => ({
       color:'black'
     },
   },
-  sectionDesktop: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
-    },
-  },
-  sectionMobile: {
-    display: 'flex',
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
-  },
 }));
 const TopBar = () => {
   const classes = useStyles();
 return(
     <div className={classes.grow}>
-      <AppBar position="static" style={{backgroundColor:'white'}}>
+      <AppBar position="static" style={{backgroundColor:'white'}} elevation={0}>
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
             adviser:
@@ -96,7 +90,7 @@ return(
             />
           </div>
           <div className={classes.grow} />
-          <Button style={{float:'right', borderRadius:'20px'}} variant='outlined'>Sign Up</Button>          
+          <Button className={classes.signupBtn} variant='outlined'>Sign Up</Button>          
         </Toolbar>
       </AppBar>
     </div>

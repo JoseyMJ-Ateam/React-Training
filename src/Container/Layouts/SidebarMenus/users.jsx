@@ -10,7 +10,7 @@ import {
   Paper,
   Button
 } from '@material-ui/core';
-import axios from 'axios';
+import axios from '../../../axios';
 import { getUserDataBegins, 
   getUserDataSuccess, 
           getUserDataFail, 
@@ -41,11 +41,10 @@ const Users = (props) => {
   const fetchPage = (page, rowsPerPage) => {
 
     dispatch(getUserDataBegins())
-    fetch(`https://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=${rowsPerPage}`)
-      .then(res => res.json())
+    axios.get(`posts?_page=${page}&_limit=${rowsPerPage}`)
       .then(response => {
-        dispatch(getUserDataSuccess(response))
-         setUser(response);
+        dispatch(getUserDataSuccess(response.data))
+         setUser(response.data);
         setLoading(false);
       })
       .catch(error => {
@@ -78,7 +77,7 @@ const Users = (props) => {
 
   const handleDelete = (id) => {
     
-    axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`)
+    axios.delete(`posts/${id}`)
       .then(response => {
         dispatch(deleteUserData(response));
         console.log(response)
