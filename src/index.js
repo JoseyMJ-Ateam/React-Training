@@ -26,9 +26,7 @@ const store = createStore(allReducers,
 ReactDOM.render(
    <Provider store = {store}> 
    <ThemeProvider theme = {theme}> 
-    <React.StrictMode>
       <App/>       
-    </React.StrictMode>
     </ThemeProvider>
    </Provider>,
   document.getElementById('root')

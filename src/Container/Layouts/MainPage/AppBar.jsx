@@ -72,6 +72,7 @@ const useStyles = makeStyles((theme) => ({
     const handleProfile = () =>{
       history.push("/dashboard/profile");
     }
+  
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -98,6 +99,7 @@ const useStyles = makeStyles((theme) => ({
     <div className={classes.grow}>
     
         <Toolbar>     
+      
           <div className={classes.grow} />      
             <IconButton
               edge="end"

@@ -51,11 +51,11 @@ const Title = () => {
         <Grid item md={3} xs={false}/>
           
         <Grid item style={{display:'flex'}}>
-            <Typography variant='p' className={classes.para}>
+            <p className={classes.para}>
         <IconButton >
             <LocationOnIcon style={{fontSize:20}}/>
         </IconButton>
-        <sub>Saint-Petersburg, Russia</sub></Typography>
+        <sub>Saint-Petersburg, Russia</sub></p>
         <Typography className={classes.para}>
         <IconButton>
             <FacebookIcon style={{fontSize:20}}/>

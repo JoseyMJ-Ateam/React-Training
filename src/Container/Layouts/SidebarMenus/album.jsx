@@ -1,7 +1,8 @@
 import React, {useEffect} from 'react';
 import { 
   makeStyles,
-  Grid
+  Grid,
+  CircularProgress
 } from '@material-ui/core';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import axios from '../../../axios';
@@ -14,7 +15,7 @@ const Album = () => {
     const [page, setPage] = React.useState(1);
     const [albumClicked, setAlbumClicked]= React.useState([]);
     const dispatch = useDispatch();
-      const useStyles = makeStyles({
+      const useStyles = makeStyles((theme) => ({
         table: {
           minWidth: '74vw',
         },
@@ -29,8 +30,12 @@ const Album = () => {
         },
         tableHead:{           
             fontWeight:600
+        },
+        loaderClass: {
+         display:'flex',
+         justifyContent:'center'
         }
-      });  
+      }));  
 
       const albumData = useSelector(state=>state.albumReducer.album.data);
      console.log(albumData)
@@ -58,7 +63,7 @@ const Album = () => {
     const classes = useStyles();
 
     if(loading){
-      return <h3>Loading....</h3>
+      return <div className={classes.loaderClass}><CircularProgress /></div>
     }
 
     return (

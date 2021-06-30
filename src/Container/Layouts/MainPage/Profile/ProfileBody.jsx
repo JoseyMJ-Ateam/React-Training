@@ -1,25 +1,30 @@
 import React from 'react';
-import {Button, CardMedia, makeStyles, CardActionArea,Card,
-    CardContent, Typography, CardActions, Grid, ListItem, IconButton} from '@material-ui/core';
+import {  Button, 
+          CardMedia, 
+          makeStyles,
+          Card,
+          CardContent, 
+          Typography, 
+          CardActions, 
+          Grid, 
+          ListItem, 
+          IconButton  } from '@material-ui/core';
 import coverPic from '../../../../assets/images/profile-cover-pic.jpg';
 import PhoneIcon from '@material-ui/icons/Phone';
-import MailIcon from '@material-ui/icons/Mail';
 import ChatIcon from '@material-ui/icons/Chat';
+import MailIcon from '@material-ui/icons/Mail';
 import StarIcon from '@material-ui/icons/Star';
 import StarHalfIcon from '@material-ui/icons/StarHalf';
 import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker
-} from '@material-ui/pickers';
-
+          MuiPickersUtilsProvider,
+          KeyboardDatePicker } from '@material-ui/pickers';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 
-const ProfileBody = (theme) => {
+const ProfileBody = () => {
   const [selectedDate, setSelectedDate] = React.useState(new Date());
 
   const handleDateChange = (date) => {
-    console.log(date);
     setSelectedDate(date);
   };
 
@@ -56,12 +61,54 @@ const ProfileBody = (theme) => {
             justifyContent:'center',
             display:'flex',
             alignItem:'center',
-            maxWidth:'700px'
+            maxWidth:'905px'
           },
+          '& .MuiPickersDatePickerRoot-toolbar':{
+            alignItems:'center'
+          },
+          // '& .MuiTypography-body1':{
+          //   display:'none'
+          // },
+          '& .MuiPickersCalendar-week':{
+            display:'flex',
+            justifyContent:'space-around'
+          },
+          '& .MuiPickersCalendarHeader-daysHeader':{
+            justifyContent:'space-around'
+          },
+          '& .MuiTypography-caption': {
+            fontSize:'1.75rem'
+          }
         },
         centerItems:{
           display:'flex',
-          justifyContent:'center'
+          justifyContent:'center',
+          marginTop:'20px'
+        },
+        gridContainer:{
+          marginTop:20
+        },
+        phoneIcon:{
+          marginRight:10
+        },
+        btn:{
+          color:'white', 
+          borderRadius:20, 
+          margin:'20px 0px'
+        },
+        starIconContainer:{
+          display:'flex', 
+          flexDirection:'column',
+          marginTop:'10px', 
+          marginLeft:'20px'
+        },
+        starIcon:{
+          color:'yellow'
+        },
+        calculatorContainer:{
+          textAlign:'center', 
+          padding:'25px',
+          borderRadius:'10px'
         }
       });
       
@@ -69,20 +116,18 @@ const ProfileBody = (theme) => {
  
       const classes = useStyles();
 return (
-    <Grid container spacing={3} style={{marginTop:20}}>
-      <Grid sm={1} xs={0}  />
+    <Grid container spacing={3} className={classes.gridContainer}>
+      <Grid item sm={1} xs={false}  />
       <Grid item md={3} xs={12} >
        <ListItem className={classes.centerItems}>
-      <PhoneIcon fontSize='small' color='disabled' style={{marginRight:10}}/>
-        <Typography variant='p'>
-         +91-98974637862 </Typography>
-         <Typography variant='p' color='textSecondary'>(Official)</Typography>
+       <PhoneIcon fontSize='small' color='disabled' className={classes.phoneIcon} />
+        <p>+91-98974637862</p>         
+         <p color='textSecondary'>(Official)</p>
          </ListItem>
          <ListItem className={classes.centerItems}>
-            <PhoneIcon color='disabled' style={{marginRight:10}}/>
-              <Typography variant='p'>
-              +91-98974637862 </Typography>
-              <Typography variant='p' color='textSecondary'>(Mobile)</Typography>
+            <PhoneIcon color='disabled' className={classes.phoneIcon} />
+              <p> +91-98974637862 </p>
+              <p color='textSecondary'>(Mobile)</p>
          </ListItem>
          <ListItem className={classes.centerItems}>
             <IconButton>
@@ -93,21 +138,21 @@ return (
          <Button 
          variant='contained' 
          color='secondary' 
-         style={{color:'white', borderRadius:20, margin:'20px 0px'}} 
+        className={classes.btn}
          fullWidth
          startIcon={<ChatIcon />}>Chat</Button>
-         <div style={{marginTop:'20px'}} className={classes.centerItems}>
+         <div className={classes.centerItems}>
          <Typography variant='h2'>4.5
             </Typography>
-            <div style={{display:'flex', flexDirection:'column',marginTop:'10px', marginLeft:'20px'}}>
+            <div className={classes.starIconContainer}>
             <div >
-            <StarIcon style={{color:'yellow'}}/>
-           <StarIcon style={{color:'yellow'}}/>
-           <StarIcon style={{color:'yellow'}}/>
-           <StarIcon style={{color:'yellow'}}/>
-           <StarHalfIcon style={{color:'yellow'}}/></div>
+            <StarIcon className={classes.starIcon}/>
+           <StarIcon className={classes.starIcon}/>
+           <StarIcon className={classes.starIcon}/>
+           <StarIcon className={classes.starIcon}/>
+           <StarHalfIcon className={classes.starIcon} /></div>
            <div>      
-            <Typography variant='p' >103 reviews</Typography>
+            <p>103 reviews</p>
             </div>         
             </div>
          </div>        
@@ -119,14 +164,14 @@ return (
           title='image title' />             
         </Grid>
         <Grid item md={3} xs={12}>
-        <Card variant="outlined" style={{textAlign:'center', padding:'25px',borderRadius:'10px'}}>
+        <Card variant="outlined" className={classes.calculatorContainer}>
       <CardContent>
         <Typography variant='h5'  className={classes.calText}>
           Loan Calculator
         </Typography>
-        <Typography variant='p'>
+        <p>
           Get great rates and an effortless close
-        </Typography>
+        </p>
       </CardContent>
       <CardActions className={classes.calculatorButton}>
         <Button size="small" variant='outlined' color='secondary' className={classes.cal} >Calculator</Button>
@@ -134,10 +179,10 @@ return (
     </Card>
         </Grid>
 
-        <Grid md={1} xs={0}/>
-        <Grid md={4} xs={0}/>
+        <Grid item md={1} xs={false}/>
+        <Grid item md={4} xs={false}/>
 <Grid item md={7} xs={12}>
-<MuiPickersUtilsProvider utils={DateFnsUtils} className={classes.calender}>
+<MuiPickersUtilsProvider utils={DateFnsUtils}>
 <div className={classes.calender}>
     <KeyboardDatePicker
       label="Material Date Picker"
@@ -149,7 +194,7 @@ return (
     </div>      
       </MuiPickersUtilsProvider>
 </Grid>
-<Grid md={1} xs={0}/>
+<Grid item md={1} xs={false}/>
     </Grid>
 )
 }

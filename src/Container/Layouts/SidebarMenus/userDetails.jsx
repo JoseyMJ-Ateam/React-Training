@@ -7,7 +7,8 @@ import { Grid,
           Card, 
           Typography, 
           Button, 
-          TextField } from '@material-ui/core';
+          TextField, 
+          CircularProgress} from '@material-ui/core';
 import {getUserDetailsBegins,
         getUserDetailsSuccess,
         getUserDetailsFail,
@@ -60,7 +61,11 @@ const useStyles = makeStyles(() => ({
     title:{
       display:'flex', 
       maxWidth:400
-    }
+    },
+    loaderClass: {
+      display:'flex',
+      justifyContent:'center'
+     }
 }))
 
 const UserDetails = (props) => {
@@ -102,7 +107,7 @@ useEffect(()=>{
 
   const classes = useStyles();
   if(loading){
-    <h2>Loading...</h2>
+    return  <div className={classes.loaderClass}><CircularProgress /></div>
   }
 
 

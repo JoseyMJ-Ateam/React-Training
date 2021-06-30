@@ -8,7 +8,8 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Button
+  Button,
+  CircularProgress
 } from '@material-ui/core';
 import axios from '../../../axios';
 import { getUserDataBegins, 
@@ -32,7 +33,11 @@ const Users = (props) => {
     tableHead: {
       fontWeight: 600,
       textAlign: 'center'
-    }
+    },
+    loaderClass: {
+      display:'flex',
+      justifyContent:'center'
+     }
   });
 
   // eslint-disable-next-line no-unused-vars
@@ -90,7 +95,7 @@ const Users = (props) => {
   const classes = useStyles();
 
   if (loading) {
-    return <h3>Loading....</h3>
+    return  <div className={classes.loaderClass}><CircularProgress /></div>
   }
 
   return (
