@@ -56,23 +56,23 @@ const Title = () => {
             <LocationOnIcon style={{fontSize:20}}/>
         </IconButton>
         <sub>Saint-Petersburg, Russia</sub></p>
-        <Typography className={classes.para}>
+        <p className={classes.para}>
         <IconButton>
             <FacebookIcon style={{fontSize:20}}/>
         </IconButton>
-        <sub>kevinsmith55</sub></Typography>
+        <sub>kevinsmith55</sub></p>
         </Grid>
         <Grid item style={{display:'flex'}}>
-        <Typography className={classes.para}>
+        <p className={classes.para}>
         <IconButton>
             <LinkedInIcon style={{fontSize:20}}/>
         </IconButton>
-        <sub>kevin_smith</sub></Typography>
-        <Typography className={classes.para}>
+        <sub>kevin_smith</sub></p>
+        <p className={classes.para}>
         <IconButton>
             <TwitterIcon style={{fontSize:20}}/>
         </IconButton>
-        <sub>kevin_smith</sub></Typography>
+        <sub>kevin_smith</sub></p>
         </Grid>
         </Grid>
         </Grid>

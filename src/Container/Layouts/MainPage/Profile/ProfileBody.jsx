@@ -66,9 +66,6 @@ const ProfileBody = () => {
           '& .MuiPickersDatePickerRoot-toolbar':{
             alignItems:'center'
           },
-          // '& .MuiTypography-body1':{
-          //   display:'none'
-          // },
           '& .MuiPickersCalendar-week':{
             display:'flex',
             justifyContent:'space-around'
@@ -83,7 +80,6 @@ const ProfileBody = () => {
         centerItems:{
           display:'flex',
           justifyContent:'center',
-          marginTop:'20px'
         },
         gridContainer:{
           marginTop:20
@@ -109,7 +105,7 @@ const ProfileBody = () => {
           textAlign:'center', 
           padding:'25px',
           borderRadius:'10px'
-        }
+        },
       });
       
 
@@ -120,7 +116,7 @@ return (
       <Grid item sm={1} xs={false}  />
       <Grid item md={3} xs={12} >
        <ListItem className={classes.centerItems}>
-       <PhoneIcon fontSize='small' color='disabled' className={classes.phoneIcon} />
+       <PhoneIcon color='disabled' className={classes.phoneIcon} />
         <p>+91-98974637862</p>         
          <p color='textSecondary'>(Official)</p>
          </ListItem>

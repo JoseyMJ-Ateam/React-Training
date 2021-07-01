@@ -3,7 +3,6 @@ import { AppBar,
         CssBaseline,
         Divider,
         Drawer,
-        Hidden,
         IconButton,
         List,
         ListItem,
@@ -115,7 +114,7 @@ function MainPage() {
   }
 
   const albumClick = () => {
-    setTitle("Album");
+    
     history.push("/dashboard/album"); 
     setTitle('Album');      
   }
@@ -127,6 +126,11 @@ function MainPage() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const handleDashboard = () => {
+    setTitle('Dashboard');
+    history.push("/dashboard"); 
+  }
 
   return (
     <div className={classes.root}>
@@ -145,7 +149,7 @@ function MainPage() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" color="inherit">
-     { title || 'Dashboard' }
+     { title }
     </Typography>
           <PrimarySearchAppBar />
         </Toolbar>
@@ -166,6 +170,10 @@ function MainPage() {
         </div>
         <Divider />
         <List>  
+        <ListItem button onClick={handleDashboard}>
+              <ListItemIcon> <GroupIcon /></ListItemIcon>
+              <Button >Dashboard</Button>
+            </ListItem>
             <ListItem button onClick={userClick}>
               <ListItemIcon> <GroupIcon /></ListItemIcon>
               <Button >Users</Button>

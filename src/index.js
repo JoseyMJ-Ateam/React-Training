@@ -14,11 +14,8 @@ const store = createStore(allReducers,
 
   const theme = createMuiTheme({
     palette: {
-      primary: {
-        main: red[500],
-      },
       secondary: {
-        main: '#11cb5f',
+        main: red[500],
       },
     },
   });
