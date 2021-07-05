@@ -1,6 +1,5 @@
 
-import { Avatar, Box, Button, useTheme,colors, Card, CardContent, CardHeader, CssBaseline, Divider, Grid, IconButton, LinearProgress, makeStyles, Paper, Typography } from '@material-ui/core';
-import { red } from '@material-ui/core/colors';
+import { Button, useTheme, Card, CardContent, Divider, Grid, IconButton, LinearProgress, makeStyles, Typography } from '@material-ui/core';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 import { Bar } from 'react-chartjs-2';

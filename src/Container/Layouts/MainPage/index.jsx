@@ -11,7 +11,8 @@ import { AppBar,
         Toolbar,
         makeStyles,
         useTheme,
-        Typography } from '@material-ui/core';
+        Typography, 
+        Hidden} from '@material-ui/core';
 import { connect } from 'react-redux';
 import { useHistory, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
@@ -39,11 +40,7 @@ const useStyles = makeStyles((theme) => ({
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
-      [theme.breakpoints.up('sm')]: {
-        width: `calc(100% - ${drawerWidth}px)`,
-        marginLeft: drawerWidth,
-      },
-    
+         
     }),
   },
   appBarShift: {
@@ -57,13 +54,11 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
-    transition: theme.transitions.create(['margin', 'width'], {
+    transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
-      [theme.breakpoints.up('sm')]: {
-        width: `calc(100% - ${drawerWidth}px)`,
-        marginLeft: drawerWidth,
-      },
+    
+      
     }),
     marginLeft: -drawerWidth,
   },
@@ -86,10 +81,10 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
   },
   drawer: {
-    [theme.breakpoints.up('sm')]: {
+    // [theme.breakpoints.up('sm')]: {
       width: drawerWidth,
       flexShrink: 0,
-    },
+    // },
   },
   drawerHeader: {
     display: 'flex',
@@ -149,12 +144,13 @@ function MainPage() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" color="inherit">
+          <Typography variant="h6" color="inherit" noWrap>
      { title }
     </Typography>
           <PrimarySearchAppBar />
         </Toolbar>
       </AppBar>
+      {/* <Hidden smUp  implementation="css"> */}
         <Drawer
         className={classes.drawer}
         variant="persistent"
@@ -185,8 +181,37 @@ function MainPage() {
             </ListItem>
         </List>  
       </Drawer>
-    
-    
+    {/* </Hidden>
+      {/* <Hidden xsDown implementation="css">
+          <Drawer
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            variant="permanent"
+            open
+          >
+          <div className={classes.drawerHeader}>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+          </IconButton>
+        </div>
+        <Divider />
+        <List>  
+        <ListItem button onClick={handleDashboard}>
+              <ListItemIcon> <GroupIcon /></ListItemIcon>
+              <Button >Dashboard</Button>
+            </ListItem>
+            <ListItem button onClick={userClick}>
+              <ListItemIcon> <GroupIcon /></ListItemIcon>
+              <Button >Users</Button>
+            </ListItem>
+            <ListItem button onClick={albumClick}>
+              <ListItemIcon> <GroupIcon /></ListItemIcon>
+              <Button >Album</Button>
+            </ListItem>
+        </List>  
+          </Drawer>
+        </Hidden> */} 
       <main  className={clsx(classes.content, {
           [classes.contentShift]: open,
         })}>
