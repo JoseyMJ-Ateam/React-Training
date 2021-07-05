@@ -34,6 +34,9 @@ const Title = () => {
         para:{
             fontSize:12,
                         
+        },
+        socialIcons:{
+            display:'flex'
         }
       }));
 
@@ -50,27 +53,27 @@ const Title = () => {
         <Grid item container xs={12}>
         <Grid item md={3} xs={false}/>
           
-        <Grid item style={{display:'flex'}}>
+        <Grid item className={classes.socialIcons}>
             <p className={classes.para}>
         <IconButton >
-            <LocationOnIcon style={{fontSize:20}}/>
+            <LocationOnIcon fontSize='small'/>
         </IconButton>
         <sub>Saint-Petersburg, Russia</sub></p>
         <p className={classes.para}>
         <IconButton>
-            <FacebookIcon style={{fontSize:20}}/>
+            <FacebookIcon fontSize='small' />
         </IconButton>
         <sub>kevinsmith55</sub></p>
         </Grid>
-        <Grid item style={{display:'flex'}}>
+        <Grid item className={classes.socialIcons}>
         <p className={classes.para}>
         <IconButton>
-            <LinkedInIcon style={{fontSize:20}}/>
+            <LinkedInIcon fontSize='small'/>
         </IconButton>
         <sub>kevin_smith</sub></p>
         <p className={classes.para}>
         <IconButton>
-            <TwitterIcon style={{fontSize:20}}/>
+            <TwitterIcon fontSize='small'/>
         </IconButton>
         <sub>kevin_smith</sub></p>
         </Grid>

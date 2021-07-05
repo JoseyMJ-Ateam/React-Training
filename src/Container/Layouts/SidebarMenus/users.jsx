@@ -15,10 +15,11 @@ import axios from '../../../axios';
 import { getUserDataBegins, 
   getUserDataSuccess, 
           getUserDataFail, 
-          deleteUserData, 
-          userSelectedData } from '../../../redux/actions/userAction';
+          deleteUserSuccess, 
+          userSelectedData, 
+          deleteUserFail,
+          deleteUserBegins} from '../../../redux/actions/userAction';
 import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
 
 const Users = (props) => {
   const [loading, setLoading] = React.useState(true);
@@ -32,7 +33,6 @@ const Users = (props) => {
     },
     tableHead: {
       fontWeight: 600,
-      textAlign: 'center'
     },
     loaderClass: {
       display:'flex',
@@ -40,9 +40,6 @@ const Users = (props) => {
      }
   });
 
-  // eslint-disable-next-line no-unused-vars
-  const userData = useSelector(state=>state.userReducer.users);
-  
   const fetchPage = (page, rowsPerPage) => {
 
     dispatch(getUserDataBegins())
@@ -62,7 +59,7 @@ const Users = (props) => {
     if (user.length === 0) {
       fetchPage(page, rowsPerPage);
     }
-  }, [page, user, rowsPerPage]);
+  },[page, user, rowsPerPage]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage + 1);
@@ -81,11 +78,14 @@ const Users = (props) => {
   }
 
   const handleDelete = (id) => {
-    
+    dispatch(deleteUserBegins())
     axios.delete(`posts/${id}`)
       .then(response => {
-        dispatch(deleteUserData(response));
-        console.log(response)
+        dispatch(deleteUserSuccess(response));
+      })
+      .catch(error => {
+        deleteUserFail(error);
+        console.log(error);
       });
     const deleteUser = user.filter(d => d.id !== id);
     console.log(deleteUser);
@@ -104,9 +104,10 @@ const Users = (props) => {
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell className={classes.tableHead}>Id</TableCell>
-              <TableCell className={classes.tableHead}>Title</TableCell>
-              <TableCell className={classes.tableHead} colSpan={2} >Action</TableCell>
+              <TableCell className={classes.tableHead} align='left'>Id</TableCell>
+              <TableCell className={classes.tableHead} align='left'>Title</TableCell>
+              <TableCell className={classes.tableHead} align='right'>Action</TableCell>
+              <TableCell className={classes.tableHead} align='right'></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

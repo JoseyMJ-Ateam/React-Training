@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from '../../../axios';
 import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
 import { Grid, 
           makeStyles,
           Card, 
@@ -12,34 +11,34 @@ import { Grid,
 import {getUserDetailsBegins,
         getUserDetailsSuccess,
         getUserDetailsFail,
-        updateUserDetailsData } from '../../../redux/actions/userDetailsAction';
+        updateUserDetailsSuccess,
+        updateUserDetailsFail,
+        updateUserDetailsBegins} from '../../../redux/actions/userDetailsAction';
 
-        // const userDetails = useSelector(state=>state.userDetailsReducer.users);
-  // console.log(userDetails)
-const useStyles = makeStyles(() => ({
-    container: {
-      direction:"column",
-      alignItems:"center",
-      justifyContent:"center" ,
-      minHeight:450 
-    },
-    
-    cardContainer:{
-        maxWidth:600,
-        minHeight:500,
-        display:'flex',
-        boxShadow: "3px 3px 3px 3px #9E9E9E"
-      },  
-    
-    gridItem:{
-      marginLeft:50,
-      marginTop:50,
-      marginBottom:50,
-      display:'flex',
-    },
-    btn: {
+        const useStyles = makeStyles(() => ({
+          container: {
+            direction:"column",
+            alignItems:"center",
+            justifyContent:"center" ,
+            minHeight:450 
+          },
+          
+          cardContainer:{
+            maxWidth:600,
+            minHeight:500,
+            display:'flex',
+            boxShadow: "3px 3px 3px 3px #9E9E9E"
+          },  
+          
+          gridItem:{
+            marginLeft:50,
+            marginTop:50,
+            marginBottom:50,
+            display:'flex',
+          },
+          btn: {
       justifyContent:'center',
-    
+      
       position:'absolute',
       left:150 
     },
@@ -52,29 +51,27 @@ const useStyles = makeStyles(() => ({
     error: {
         color: 'red',
         marginLeft:50
-    },
-    imgContainer: {
+      },
+      imgContainer: {
         margin:30,
         display:'flex',
         alignItems:'center'
-    },
-    title:{
-      display:'flex', 
-      maxWidth:400
-    },
-    loaderClass: {
-      display:'flex',
-      justifyContent:'center'
-     }
-}))
-
-const UserDetails = (props) => {
-  const [loading, setLoading] = useState(true)
-  const [selectedUser, setSelectedUser] = useState({});
-
-  const userDetails = useSelector(state=>state.userDetailsReducer.users);
-  console.log(userDetails)
-  console.log(selectedUser)
+      },
+      title:{
+        display:'flex', 
+        maxWidth:400
+      },
+      loaderClass: {
+        display:'flex',
+        justifyContent:'center'
+      }
+    }))
+    
+    const UserDetails = (props) => {
+      const [loading, setLoading] = useState(true)
+      const [selectedUser, setSelectedUser] = useState({});
+      
+      
   const dispatch = useDispatch();
   
 useEffect(()=>{
@@ -89,14 +86,17 @@ useEffect(()=>{
        dispatch(getUserDetailsFail(error)) 
       console.log(error)
       });
-
-},[])
+},[selectedUser])
 
   const handleUser = (e) => {
     e.preventDefault();
+    dispatch(updateUserDetailsBegins())
     axios.put('posts/' + props.match.params.id, selectedUser)
     .then(res => {
-      dispatch(updateUserDetailsData(res))
+      dispatch(updateUserDetailsSuccess(res))
+    })
+    .catch(error =>{
+      updateUserDetailsFail(error)
     })
 
   }

@@ -42,7 +42,7 @@ const options = {
 
 const LineChart = () => (
   <>
-    <Line data={data} options={options} style={{marginTop:'15px'}}/>
+    <Line data={data} options={options} />
   </>
 );
 

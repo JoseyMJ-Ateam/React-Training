@@ -15,14 +15,23 @@ export const getUserDataFail = (data)=>{
         data
     }
 }
-
-export const deleteUserData = (data)=>{
+export const  deleteUserBegins =()=>{
     return {
-        type: 'DELETE_USER',
+        type:'DELETE_USER_BEGINS'
+    }
+}
+export const deleteUserSuccess = (data)=>{
+    return {
+        type: 'DELETE_USER_SUCCESS',
         data
     }
 }
-
+export const deleteUserFail = (data)=>{
+    return {
+        type: 'DELETE_USER_FAILS',
+        data
+    }
+}
 export const userSelectedData = ()=>{
     return {
         type: 'USER_SELECTED',

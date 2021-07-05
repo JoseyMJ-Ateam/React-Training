@@ -12,7 +12,7 @@ import { AppBar,
         makeStyles,
         useTheme,
         Typography, 
-        Hidden} from '@material-ui/core';
+        } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { useHistory, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
@@ -21,7 +21,7 @@ import GroupIcon from '@material-ui/icons/Group';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-
+import PhotoAlbumIcon from '@material-ui/icons/PhotoAlbum';
 import PrimarySearchAppBar from '../MainPage/AppBar';
 import Users from '../SidebarMenus/users';
 import Album from '../SidebarMenus/album';
@@ -128,6 +128,30 @@ function MainPage() {
     history.push("/dashboard"); 
   }
 
+  const drawer = (
+    <>
+    <div className={classes.drawerHeader}>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+          </IconButton>
+        </div>
+        <Divider />
+        <List>  
+        <ListItem button onClick={handleDashboard}>
+             
+              <Button >Dashboard</Button>
+            </ListItem>
+            <ListItem button onClick={userClick}>
+              <ListItemIcon> <GroupIcon /></ListItemIcon>
+              <Button >Users</Button>
+            </ListItem>
+            <ListItem button onClick={albumClick}>
+              <ListItemIcon> <PhotoAlbumIcon /></ListItemIcon>
+              <Button >Album</Button>
+            </ListItem>
+        </List>  
+        </>
+  )
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -150,7 +174,6 @@ function MainPage() {
           <PrimarySearchAppBar />
         </Toolbar>
       </AppBar>
-      {/* <Hidden smUp  implementation="css"> */}
         <Drawer
         className={classes.drawer}
         variant="persistent"
@@ -160,58 +183,9 @@ function MainPage() {
           paper: classes.drawerPaper,
         }}
       >
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
-        </div>
-        <Divider />
-        <List>  
-        <ListItem button onClick={handleDashboard}>
-              <ListItemIcon> <GroupIcon /></ListItemIcon>
-              <Button >Dashboard</Button>
-            </ListItem>
-            <ListItem button onClick={userClick}>
-              <ListItemIcon> <GroupIcon /></ListItemIcon>
-              <Button >Users</Button>
-            </ListItem>
-            <ListItem button onClick={albumClick}>
-              <ListItemIcon> <GroupIcon /></ListItemIcon>
-              <Button >Album</Button>
-            </ListItem>
-        </List>  
+       {drawer} 
       </Drawer>
-    {/* </Hidden>
-      {/* <Hidden xsDown implementation="css">
-          <Drawer
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            variant="permanent"
-            open
-          >
-          <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
-        </div>
-        <Divider />
-        <List>  
-        <ListItem button onClick={handleDashboard}>
-              <ListItemIcon> <GroupIcon /></ListItemIcon>
-              <Button >Dashboard</Button>
-            </ListItem>
-            <ListItem button onClick={userClick}>
-              <ListItemIcon> <GroupIcon /></ListItemIcon>
-              <Button >Users</Button>
-            </ListItem>
-            <ListItem button onClick={albumClick}>
-              <ListItemIcon> <GroupIcon /></ListItemIcon>
-              <Button >Album</Button>
-            </ListItem>
-        </List>  
-          </Drawer>
-        </Hidden> */} 
+      
       <main  className={clsx(classes.content, {
           [classes.contentShift]: open,
         })}>

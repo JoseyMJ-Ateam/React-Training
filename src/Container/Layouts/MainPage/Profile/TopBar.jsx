@@ -66,19 +66,23 @@ const useStyles = makeStyles((theme) => ({
       color:'black'
     },
   },
+
+  whiteBgApp:{
+    backgroundColor:'white'
+  }
 }));
 const TopBar = () => {
   const classes = useStyles();
 return(
     <div className={classes.grow}>
-      <AppBar position="static" style={{backgroundColor:'white'}} elevation={0}>
+      <AppBar position="static" className={classes.whiteBgApp} elevation={0}>
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
             adviser:
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
-              <SearchIcon style={{color:'black'}} fontSize='small' />
+              <SearchIcon className={classes.inputRoot} fontSize='small' />
             </div>
             <InputBase
               placeholder="Search…"

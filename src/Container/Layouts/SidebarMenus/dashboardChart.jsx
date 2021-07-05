@@ -1,21 +1,12 @@
 
-    import { Bar, defaults } from 'react-chartjs-2';
+    import { Bar } from 'react-chartjs-2';
     
 import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
   Divider,
-  useTheme,
   colors
 } from '@material-ui/core';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
-const DashboardChart = (props) => {
-  const theme = useTheme();
+const DashboardChart = () => {
   const data = {
     datasets: [
       {

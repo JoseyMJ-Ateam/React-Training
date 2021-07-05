@@ -19,12 +19,19 @@ export default function userDetailsReducer(state = initialState, action) {
                 ...state, isLoading: false, 
                 errorMessgae: action.data 
             }
-        case 'UPDATE_USER_DETAILS':
+        case 'UPDATE_USER_DETAILS_BEGINS':
+            return { ...state, isLoading:true}
+        case 'UPDATE_USER_DETAILS_SUCCESS':
             return {
                 ...state,
                 isLoading:false,
                 users: action.data 
-            }        
+            }  
+        case 'UPDATE_USER_DETAILS_FAILS' :
+            return {
+                ...state, isLoading:false,
+                errorMessgae:action.data
+            }      
             default:
             return state;
     }

@@ -15,9 +15,20 @@ export const getUserDetailsFail = (data)=>{
         data
     }
 }
-export const updateUserDetailsData = (data)=>{
+export const  updateUserDetailsBegins =()=>{
     return {
-        type: 'UPDATE_USER_DETAILS',
+        type:'UPDATE_USER_DETAILS_BEGINS'
+    }
+}
+export const updateUserDetailsSuccess = (data)=>{
+    return {
+        type: 'UPDATE_USER_DETAILS_SUCCESS',
+        data
+    }
+}
+export const updateUserDetailsFail = (data)=>{
+    return {
+        type: 'UPDATE_USER_DETAILS_FAILS',
         data
     }
 }
