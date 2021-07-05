@@ -19,7 +19,7 @@ import { getUserDataBegins,
           userSelectedData } from '../../../redux/actions/userAction';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-// nothing
+
 const Users = (props) => {
   const [loading, setLoading] = React.useState(true);
   const [user, setUser] = React.useState([]);
