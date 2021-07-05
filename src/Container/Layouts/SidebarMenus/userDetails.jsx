@@ -12,7 +12,7 @@ import { Grid,
 import {getUserDetailsBegins,
         getUserDetailsSuccess,
         getUserDetailsFail,
-        updateUserDetailsData } from '../../../Redux/actions/userDetailsAction';
+        updateUserDetailsData } from '../../../redux/actions/userDetailsAction';
 
         // const userDetails = useSelector(state=>state.userDetailsReducer.users);
   // console.log(userDetails)

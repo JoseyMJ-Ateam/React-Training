@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import App from './App';
-import allReducers from './Redux/reducers';
+import allReducers from './redux/reducers';
 import reportWebVitals from './reportWebVitals';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { red } from '@material-ui/core/colors';

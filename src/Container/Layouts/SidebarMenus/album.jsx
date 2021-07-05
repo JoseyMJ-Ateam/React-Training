@@ -7,7 +7,7 @@ import {
 import InfiniteScroll from 'react-infinite-scroll-component';
 import axios from '../../../axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAlbumDataBegins, getAlbumDataSuccess } from '../../../Redux/actions/albumActions';
+import { getAlbumDataBegins, getAlbumDataSuccess } from '../../../redux/actions/albumActions';
 
 const Album = () => {
     const [loading, setLoading] = React.useState(true);

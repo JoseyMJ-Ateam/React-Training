@@ -16,7 +16,7 @@ import { getUserDataBegins,
   getUserDataSuccess, 
           getUserDataFail, 
           deleteUserData, 
-          userSelectedData } from '../../../Redux/actions/userAction';
+          userSelectedData } from '../../../redux/actions/userAction';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 

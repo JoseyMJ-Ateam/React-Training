@@ -4,7 +4,7 @@ import * as yup from 'yup';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { Grid, makeStyles,Card } from '@material-ui/core';
-import * as authAction from '../../Redux/actions/authAction';
+import * as authAction from '../../redux/actions/authAction';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 const useStyles = makeStyles(() => ({
