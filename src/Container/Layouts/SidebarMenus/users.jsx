@@ -35,8 +35,9 @@ const Users = (props) => {
       fontWeight: 600,
     },
     loaderClass: {
-      display:'flex',
-      justifyContent:'center'
+      position:'absolute',
+      top:'50%',
+      left:'50%'
      }
   });
 

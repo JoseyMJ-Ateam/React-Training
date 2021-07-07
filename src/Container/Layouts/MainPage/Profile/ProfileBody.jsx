@@ -108,8 +108,6 @@ const ProfileBody = () => {
         },
       });
       
-
- 
       const classes = useStyles();
 return (
     <Grid container spacing={3} className={classes.gridContainer}>
@@ -174,24 +172,23 @@ return (
       </CardActions>
     </Card>
         </Grid>
-
         <Grid item md={1} xs={false}/>
         <Grid item md={4} xs={false}/>
-<Grid item md={7} xs={12}>
-<MuiPickersUtilsProvider utils={DateFnsUtils}>
-<div className={classes.calender}>
-    <KeyboardDatePicker
-      label="Material Date Picker"
-      variant="static"
-      value={selectedDate}
-      onChange={handleDateChange}
-      
-    />
-    </div>      
-      </MuiPickersUtilsProvider>
-</Grid>
-<Grid item md={1} xs={false}/>
-    </Grid>
+      <Grid item md={7} xs={12}>
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <div className={classes.calender}>
+          <KeyboardDatePicker
+            label="Material Date Picker"
+            variant="static"
+            value={selectedDate}
+            onChange={handleDateChange}
+            
+          />
+          </div>      
+            </MuiPickersUtilsProvider>
+      </Grid>
+      <Grid item md={1} xs={false}/>
+  </Grid>
 )
 }
 

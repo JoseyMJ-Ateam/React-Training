@@ -1,31 +1,39 @@
 import { ThemeProvider } from '@material-ui/core';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { Provider, useSelector } from 'react-redux';
 import App from './App';
 import allReducers from './redux/reducers';
+import logger from 'redux-logger';
+import { createStore, applyMiddleware } from 'redux';
+// import App from './Container/Layouts/MainPage/testing';
 import reportWebVitals from './reportWebVitals';
-import { createMuiTheme } from '@material-ui/core/styles';
-import { red } from '@material-ui/core/colors';
-const store = createStore(allReducers, 
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+import { createMuiTheme } from "@material-ui/core";
+ const store = createStore(allReducers, applyMiddleware(logger)
+// window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
-  const theme = createMuiTheme({
-    palette: {
-      secondary: {
-        main: red[500],
-      },
-    },
-  });
+// const newtheme = createMuiTheme(theme);
+export default function Index(){
+  const themeSelector = useSelector(state => state.colorSettingReducer.themeColor);
+  return (
+     
+    <ThemeProvider theme={createMuiTheme(
+   {
+     palette: {
+       primary: { main: themeSelector },
+     }
+ })}> 
+       <App />       
+     </ThemeProvider>
+  )
+}
 
 ReactDOM.render(
-   <Provider store = {store}> 
-   <ThemeProvider theme = {theme}> 
-      <App/>       
-    </ThemeProvider>
-   </Provider>,
-  document.getElementById('root')
+  <Provider store = {store}>
+  <Index/>
+    </Provider>,
+   document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

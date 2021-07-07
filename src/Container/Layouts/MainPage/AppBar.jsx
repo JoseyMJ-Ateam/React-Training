@@ -10,6 +10,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PersonIcon from '@material-ui/icons/Person';
 import { compose } from 'redux';
 import { useHistory, withRouter } from 'react-router-dom';
+import SettingsIcon from '@material-ui/icons/Settings';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -67,8 +68,13 @@ const useStyles = makeStyles((theme) => ({
     props.onLogOut();
     localStorage.clear();
   };
-
+  
   let history = useHistory();
+
+  const handleSettings = () => {
+    history.push("/dashboard/settings")
+  }
+  
     const handleProfile = () =>{
       history.push("/dashboard/profile");
     }
@@ -90,7 +96,10 @@ const useStyles = makeStyles((theme) => ({
       <IconButton><PersonIcon /></IconButton>
       My Profile
       </MenuItem>
-      
+      <MenuItem onClick={handleSettings}>
+      <IconButton><SettingsIcon /></IconButton>
+      Settings
+      </MenuItem>
     </Menu>
   );
 

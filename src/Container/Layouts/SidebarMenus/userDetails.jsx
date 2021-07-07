@@ -27,7 +27,6 @@ import {getUserDetailsBegins,
             maxWidth:600,
             minHeight:500,
             display:'flex',
-            boxShadow: "3px 3px 3px 3px #9E9E9E"
           },  
           
           gridItem:{
@@ -62,8 +61,9 @@ import {getUserDetailsBegins,
         maxWidth:400
       },
       loaderClass: {
-        display:'flex',
-        justifyContent:'center'
+        position:'absolute',
+        top:'50%',
+        left:'50%'
       }
     }))
     
@@ -86,7 +86,7 @@ useEffect(()=>{
        dispatch(getUserDetailsFail(error)) 
       console.log(error)
       });
-},[selectedUser])
+},[])
 
   const handleUser = (e) => {
     e.preventDefault();

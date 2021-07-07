@@ -2,8 +2,8 @@
 import { Button, Card, CardContent, Divider, Grid, IconButton, LinearProgress, makeStyles, Typography } from '@material-ui/core';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import FolderOpenIcon from '@material-ui/icons/FolderOpen';
-import DashboardChart from './dashboardChart';
-import LineChart from './lineChart';
+import DashboardChart from './DashboardChart';
+import LineChart from './LineChart';
 
 const useStyles = makeStyles  ({
    iconBtn:{
@@ -47,7 +47,7 @@ const Dashboard = () => {
                     </Typography>
                     </Grid>
                     <Grid item md={4} xs={3} >                   
-                    <IconButton className={classes.btn} >
+                    <IconButton className={classes.iconBtn} >
                         <AttachMoneyIcon />
                     </IconButton>                    
                     </Grid>
@@ -71,7 +71,7 @@ const Dashboard = () => {
                     </Typography>
                     </Grid>
                     <Grid item md={4}  xs={3}>
-                    <IconButton className={classes.btn} >
+                    <IconButton className={classes.iconBtn} >
                         <FolderOpenIcon />
                     </IconButton>                    
                     </Grid>

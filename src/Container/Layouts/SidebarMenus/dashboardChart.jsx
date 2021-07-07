@@ -1,6 +1,5 @@
 
-    import { Bar } from 'react-chartjs-2';
-    
+import { Bar } from 'react-chartjs-2';   
 import {
   Divider,
   colors
@@ -17,9 +16,7 @@ const DashboardChart = () => {
       },
     ],
     labels: ['1 Aug', '2 Aug', '3 Aug', '4 Aug', '5 Aug', '6 Aug', '6 Aug', '6 Aug', '6 Aug'],
-  };
-
-  
+  }; 
 
   return (
       <>
@@ -45,8 +42,7 @@ const DashboardChart = () => {
             }}
            
           />
-      <Divider />
-      
+      <Divider />      
    </>
   );
 };

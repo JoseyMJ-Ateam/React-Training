@@ -19,15 +19,17 @@ import { compose } from 'redux';
 import { Route } from 'react-router-dom';
 import GroupIcon from '@material-ui/icons/Group';
 import MenuIcon from '@material-ui/icons/Menu';
+import DashboardIcon from '@material-ui/icons/Dashboard';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import PhotoAlbumIcon from '@material-ui/icons/PhotoAlbum';
 import PrimarySearchAppBar from '../MainPage/AppBar';
-import Users from '../SidebarMenus/users';
-import Album from '../SidebarMenus/album';
-import UserDetails from '../SidebarMenus/userDetails';
-import Dashboard from '../SidebarMenus/dashoard';
+import Users from '../SidebarMenus/Users';
+import Album from '../SidebarMenus/Album';
+import UserDetails from '../SidebarMenus/UserDetails';
+import Dashboard from '../SidebarMenus/Dashoard';
 import clsx from 'clsx';
+import News from '../SidebarMenus/News';
 
 const drawerWidth = 240;
 
@@ -115,6 +117,12 @@ function MainPage() {
     setTitle('Album');      
   }
 
+  const newsClick = () => {
+    
+    history.push("/dashboard/news"); 
+    setTitle('News');      
+  }
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -138,7 +146,7 @@ function MainPage() {
         <Divider />
         <List>  
         <ListItem button onClick={handleDashboard}>
-             
+        <ListItemIcon> <DashboardIcon /></ListItemIcon>
               <Button >Dashboard</Button>
             </ListItem>
             <ListItem button onClick={userClick}>
@@ -148,6 +156,10 @@ function MainPage() {
             <ListItem button onClick={albumClick}>
               <ListItemIcon> <PhotoAlbumIcon /></ListItemIcon>
               <Button >Album</Button>
+            </ListItem>
+            <ListItem button onClick={newsClick}>
+              <ListItemIcon> <PhotoAlbumIcon /></ListItemIcon>
+              <Button >News</Button>
             </ListItem>
         </List>  
         </>
@@ -191,6 +203,7 @@ function MainPage() {
         })}>
         <div className={classes.drawerHeader} />
         <Route path = '/dashboard/album' component ={Album} />  
+        <Route path = '/dashboard/news' component ={News} />  
          <Route path = '/dashboard' exact component={Dashboard} />
           <Route path = '/dashboard/users' exact component ={Users} />
         <Route path='/dashboard/users/:id'  component={UserDetails} />

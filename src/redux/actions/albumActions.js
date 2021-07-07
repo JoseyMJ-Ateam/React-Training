@@ -1,17 +1,17 @@
 export const  getAlbumDataBegins =()=>{
     return {
-        type:'GET_TABLE_DATA_BEGINS'
+        type:'GET_ALBUM_DATA_BEGINS'
     }
 }
 export const  getAlbumDataSuccess =(data)=>{
     return {
-        type:'GET_TABLE_DATA_SUCCESS',
+        type:'GET_ALBUM_DATA_SUCCESS',
         data
     }
 }
 export const getAlbumDataFail = (data)=>{
     return {
-        type: 'GET_TABLE_DATA_FAILS',
+        type: 'GET_ALBUM_DATA_FAILS',
         data
     }
 }

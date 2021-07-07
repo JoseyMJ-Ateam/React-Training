@@ -1,17 +1,17 @@
 export const  getUserDataBegins =()=>{
     return {
-        type:'GET_TABLE_DATA_BEGINS'
+        type:'GET_USER_DATA_BEGINS'
     }
 }
 export const  getUserDataSuccess =(data)=>{
     return {
-        type:'GET_TABLE_DATA_SUCCESS',
+        type:'GET_USER_DATA_SUCCESS',
         data
     }
 }
 export const getUserDataFail = (data)=>{
     return {
-        type: 'GET_TABLE_DATA_FAILS',
+        type: 'GET_USER_DATA_FAILS',
         data
     }
 }

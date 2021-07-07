@@ -1,24 +1,24 @@
 
 let initialState = {
     isLoading: false,
-    album: [],
-    errorMessgae: ''
+    news: [],
+    errorMessage: ''
 }
 
 
-export default function albumReducer(state = initialState, action) {
+export default function newsReducer(state = initialState, action) {
 
     switch (action.type) {
-        case 'GET_ALBUM_DATA_BEGINS':
+        case 'GET_NEWS_DATA_BEGINS':
             return { ...state, isLoading: true }
-        case 'GET_ALBUM_DATA_SUCCESS':
+        case 'GET_NEWS_DATA_SUCCESS':
             return {
                 ...state, isLoading: false,
-                album: action.data
+                news: action.data
             }
-        case 'GET_ALBUM_DATA_FAILS':
+        case 'GET_NEWS_DATA_FAILS':
             return { ...state, isLoading: false, 
-                     errorMessgae: action.data }
+                     errorMessage: action.data }
         default:
             return state;
     }

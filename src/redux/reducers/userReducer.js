@@ -7,14 +7,14 @@ let initialState = {
 export default function userReducer(state = initialState, action) {
 
     switch (action.type) {
-        case 'GET_TABLE_DATA_BEGINS':
+        case 'GET_USER_DATA_BEGINS':
             return { ...state, isLoading: true }
-        case 'GET_TABLE_DATA_SUCCESS':
+        case 'GET_USER_DATA_SUCCESS':
             return {
                 ...state, isLoading: false,
                 users: action.data
             }
-        case 'GET_TABLE_DATA_FAILS':
+        case 'GET_USER_DATA_FAILS':
             return { ...state, isLoading: false, errorMessage: action.data }
         case 'DELETE _USER_BEGINS':
             return { ...state, isLoading: true }
