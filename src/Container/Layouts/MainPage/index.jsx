@@ -30,6 +30,7 @@ import UserDetails from '../SidebarMenus/UserDetails';
 import Dashboard from '../SidebarMenus/Dashoard';
 import clsx from 'clsx';
 import News from '../SidebarMenus/News';
+import StripeForm from '../SidebarMenus/StrpeForm';
 
 const drawerWidth = 240;
 
@@ -136,6 +137,11 @@ function MainPage() {
     history.push("/dashboard"); 
   }
 
+  const stripeClick = () => {
+    setTitle('Payment Method');
+    history.push("/dashboard/payment"); 
+  }
+
   const drawer = (
     <>
     <div className={classes.drawerHeader}>
@@ -160,6 +166,10 @@ function MainPage() {
             <ListItem button onClick={newsClick}>
               <ListItemIcon> <PhotoAlbumIcon /></ListItemIcon>
               <Button >News</Button>
+            </ListItem>
+            <ListItem button onClick={stripeClick}>
+              <ListItemIcon> <PhotoAlbumIcon /></ListItemIcon>
+              <Button >Payment Form</Button>
             </ListItem>
         </List>  
         </>
@@ -203,6 +213,7 @@ function MainPage() {
         })}>
         <div className={classes.drawerHeader} />
         <Route path = '/dashboard/album' component ={Album} />  
+        <Route path = '/dashboard/payment' component ={StripeForm} />  
         <Route path = '/dashboard/news' component ={News} />  
          <Route path = '/dashboard' exact component={Dashboard} />
           <Route path = '/dashboard/users' exact component ={Users} />

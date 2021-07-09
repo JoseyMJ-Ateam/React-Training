@@ -9,6 +9,7 @@ import { createStore, applyMiddleware } from 'redux';
 // import App from './Container/Layouts/MainPage/testing';
 import reportWebVitals from './reportWebVitals';
 import { createMuiTheme } from "@material-ui/core";
+import SocketIO from './Container/Layouts/SidebarMenus/SocketIO';
  const store = createStore(allReducers, applyMiddleware(logger)
 // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
@@ -31,7 +32,7 @@ export default function Index(){
 
 ReactDOM.render(
   <Provider store = {store}>
-  <Index/>
+  <App/>
     </Provider>,
    document.getElementById('root')
 );

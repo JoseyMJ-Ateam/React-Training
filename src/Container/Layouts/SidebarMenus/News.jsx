@@ -5,7 +5,7 @@ import {
   CircularProgress
 } from '@material-ui/core';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getNewsDataBegins, getNewsDataFail, getNewsDataSuccess } from '../../../redux/actions/newsActions';
 import axios from 'axios';
 
@@ -31,8 +31,9 @@ const News = () => {
             fontWeight:600
         },
         loaderClass: {
-         display:'flex',
-         justifyContent:'center'
+        position:'absolute',
+        top:'50%',
+        left:'50%'
         }
       }));  
 
@@ -42,11 +43,10 @@ const News = () => {
      useEffect(()=>{     
      fetchPages();
   } ,[])   
-    
      const fetchPages = () => {
        setPage(page + 1);
       dispatch(getNewsDataBegins());
-      axios.get(`https://newsapi.org/v2/everything?q=tesla&from=2021-06-07&sortBy=publishedAt&apiKey=a1e53f4dad6a4f50a37059fa059c2515&page=${page}&_limit=10`)
+      axios.get(` https://newsapi.org/v2/everything?q=tesla&from=2021-06-09&sortBy=publishedAt&apiKey=a1e53f4dad6a4f50a37059fa059c2515&page=${page}&_limit=10`)
       .then(response => {
         dispatch(getNewsDataSuccess(response))
         setNews(news.concat(response.data.articles));
