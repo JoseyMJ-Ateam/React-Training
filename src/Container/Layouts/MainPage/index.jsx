@@ -191,7 +191,7 @@ function MainPage() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" color="inherit" noWrap>
-     { title }
+     { title || 'Dashboard'}
     </Typography>
           <PrimarySearchAppBar />
         </Toolbar>
@@ -212,12 +212,12 @@ function MainPage() {
           [classes.contentShift]: open,
         })}>
         <div className={classes.drawerHeader} />
-        <Route path = '/dashboard/album' component ={Album} />  
-        <Route path = '/dashboard/payment' component ={StripeForm} />  
-        <Route path = '/dashboard/news' component ={News} />  
-         <Route path = '/dashboard' exact component={Dashboard} />
-          <Route path = '/dashboard/users' exact component ={Users} />
-        <Route path='/dashboard/users/:id'  component={UserDetails} />
+        <Route path = '/dashboard/album' ><Album/></Route>  
+        <Route path = '/dashboard/payment' ><StripeForm /></Route>  
+        <Route path = '/dashboard/news' ><News/></Route>  
+         <Route path = '/dashboard' exact ><Dashboard /></Route>
+          <Route path = '/dashboard/users' exact ><Users /></Route>
+        <Route path='/dashboard/users/:id'><UserDetails /></Route>
       </main>
     </div>
   );

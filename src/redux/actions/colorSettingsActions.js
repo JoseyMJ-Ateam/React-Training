@@ -1,17 +1,19 @@
+import * as actions from '../constants';
+
 export const  colorSettingBegins =()=>{
     return {
-        type:'COLOR_SETTINGS_BEGINS'
+        type:actions.COLOR_SETTINGS_BEGINS
     }
 }
 export const colorSettingsSuccess = (data)=>{
     return {
-        type: 'COLOR_SETTING_SUCCESS',
+        type: actions.COLOR_SETTING_SUCCESS,
         data
     }
 }
 export const colorSettingsFail = (data)=>{
     return {
-        type: 'COLOR_SETTING_FAIL',
+        type: actions.COLOR_SETTING_FAIL,
         data
     }
 }

@@ -5,15 +5,17 @@ import {
   CircularProgress
 } from '@material-ui/core';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getNewsDataBegins, getNewsDataFail, getNewsDataSuccess } from '../../../redux/actions/newsActions';
 import axios from 'axios';
+import Index from '../../..';
 
 const News = () => {
-    const [loading, setLoading] = React.useState(true);
+    // const [loading, setLoading] = React.useState(true);
     const [news, setNews] = React.useState([]);
     const [page, setPage] = React.useState(1);
     const dispatch = useDispatch();
+    const isLoading = useSelector(state => state.newsReducer.isLoading);
       const useStyles = makeStyles((theme) => ({
         table: {
           minWidth: '74vw',
@@ -46,11 +48,11 @@ const News = () => {
      const fetchPages = () => {
        setPage(page + 1);
       dispatch(getNewsDataBegins());
-      axios.get(` https://newsapi.org/v2/everything?q=tesla&from=2021-06-09&sortBy=publishedAt&apiKey=a1e53f4dad6a4f50a37059fa059c2515&page=${page}&_limit=10`)
+      axios.get(` https://newsapi.org/v2/everything?q=tesla&from=2021-07-11&sortBy=publishedAt&apiKey=a1e53f4dad6a4f50a37059fa059c2515&page=${page}&_limit=10`)
       .then(response => {
         dispatch(getNewsDataSuccess(response))
         setNews(news.concat(response.data.articles));
-        setLoading(false);       
+        // setLoading(false);       
       })
       .catch(res => {
           dispatch(getNewsDataFail(res))
@@ -60,7 +62,7 @@ const News = () => {
 
     const classes = useStyles();
 
-    if(loading){
+    if(isLoading){
       return <div className={classes.loaderClass}><CircularProgress /></div>
     }
 
@@ -76,11 +78,11 @@ const News = () => {
        >
            <Grid container spacing={4} >
        
-             {news.map(a => (
-                <Grid key={a.id} item xs={12} md={4} >                
+             {news.map((a, index) => (
+                <Grid key={index} item xs={12} md={4} >                
                   
                     <div>
-                    <p>{a.id}</p>
+                    {/* <p>{a.index}</p> */}
                     <h1>{a.title}</h1>
                     </div> 
 

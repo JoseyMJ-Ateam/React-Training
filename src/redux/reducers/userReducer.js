@@ -1,3 +1,5 @@
+import * as actions from '../constants';
+
 let initialState = {
     isLoading: false,
     users: [],
@@ -7,26 +9,26 @@ let initialState = {
 export default function userReducer(state = initialState, action) {
 
     switch (action.type) {
-        case 'GET_USER_DATA_BEGINS':
+        case actions.GET_USER_DATA_BEGINS:
             return { ...state, isLoading: true }
-        case 'GET_USER_DATA_SUCCESS':
+        case actions.GET_USER_DATA_SUCCESS:
             return {
                 ...state, isLoading: false,
                 users: action.data
             }
-        case 'GET_USER_DATA_FAILS':
+        case actions.GET_USER_DATA_FAILS:
             return { ...state, isLoading: false, errorMessage: action.data }
-        case 'DELETE _USER_BEGINS':
+        case actions.DELETE_USER_BEGINS:
             return { ...state, isLoading: true }
-        case 'DELETE_USER_SUCCESS':
+        case actions.DELETE_USER_SUCCESS:
             return {
                 ...state,
                 isLoading:false,
                 users: action.data
             }
-        case 'DELETE_USER_FAILS':
+        case actions.DELETE_USER_FAILS:
                 return { ...state, isLoading: false, errorMessage: action.data }
-        case 'USER_SELECTED':
+        case actions.USER_SELECTED:
             return {
                 ...state                
             }

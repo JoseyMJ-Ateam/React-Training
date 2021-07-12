@@ -4,8 +4,10 @@ import { AppBar,
          Toolbar,
          Typography,
          InputBase,
-         Button } from '@material-ui/core';
+         Button, 
+         Breadcrumbs} from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -75,6 +77,16 @@ const TopBar = () => {
   const classes = useStyles();
 return(
     <div className={classes.grow}>
+         <Breadcrumbs aria-label="breadcrumb">
+  <Link color="inherit" to="/dashboard" >
+    Dashboard
+  </Link>
+  <p
+    color="textPrimary"
+    aria-current="page">
+    Profile
+  </p>
+</Breadcrumbs>
       <AppBar position="static" className={classes.whiteBgApp} elevation={0}>
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>

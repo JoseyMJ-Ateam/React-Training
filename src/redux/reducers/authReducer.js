@@ -1,23 +1,25 @@
+
+import * as actions from '../constants';
 const token = localStorage.getItem('user');
 
 const initialState = {
-    isLogged:  token ? true : false
+    isLogged: token
 }
 
 
 const authReducer = (state = initialState, action) => {
     switch(action.type){
-        case 'LOGIN_SUCCESS':
+        case actions.LOGIN_SUCCESS:
             return {
                 ...state,                
                 isLogged: action.data
             }
-        case 'LOGIN_FAIL' :
+        case actions.LOGIN_FAIL :
             return {
                 ...state,
                 isLogged: false
             }
-        case 'LOGOUT' :
+        case actions.LOGOUT :
             return {
                 state,
                 isLogged : false

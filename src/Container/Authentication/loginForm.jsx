@@ -8,7 +8,9 @@ import { Grid,
          Button } from '@material-ui/core';
 import * as authAction from '../../redux/actions/authAction';
 import { bindActionCreators } from 'redux';
-import {connect} from 'react-redux';
+import {connect, useDispatch} from 'react-redux';
+import { setSnackbar } from '../../redux/reducers/snackbarReducer';
+import CustomizedSnackbars from '../Snackbar';
 const useStyles = makeStyles(() => ({
     container: {
       direction:"column",
@@ -19,7 +21,6 @@ const useStyles = makeStyles(() => ({
     cardContainer:{
         width:400,
         height:400,
-        boxShadow: "3px 3px 3px 3px #9E9E9E"
       },  
     
     gridItem:{
@@ -58,7 +59,7 @@ const validationSchema = yup.object({
 });
 
 const LoginForm = (props) => {
-  const [logged, setLogged] = useState(false);
+  const dispatch = useDispatch();
 const { actions} =props;
   const formik = useFormik({
     initialValues: {
@@ -68,7 +69,13 @@ const { actions} =props;
     validationSchema: validationSchema,
     onSubmit: (values) => {
       actions.authAction(values);
-      setLogged(true);
+      if(props.user){
+
+        dispatch(setSnackbar(true,'success', 'Submitted Successfully'))
+      }else{
+        dispatch(setSnackbar(true, 'error', 'Your email address or password is wrong'))
+      }
+
     },
   });
 
@@ -79,6 +86,7 @@ const { actions} =props;
         className={classes.container}
        >
         <Card className={classes.cardContainer}>
+          
             <form onSubmit={formik.handleSubmit} className={classes.formContainer} >
                 <Grid item className={classes.gridItem} >
                     <TextField
@@ -110,9 +118,7 @@ const { actions} =props;
                     Submit
                     </Button>                   
                 </Grid>
-                <div>
-                    {!props.user && logged ? <p className={classes.error}>Invalid Username or Password</p> : null}
-                    </div>
+                <CustomizedSnackbars />
             </form>
           
         </Card>

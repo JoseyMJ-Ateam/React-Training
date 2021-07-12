@@ -1,53 +1,43 @@
-// import React, { useState, useEffect } from "react";
-// import "./styles.css";
+import { useState } from "react";
+import { loadStripe } from "@stripe/stripe-js";
 
-// const ProductDisplay = () => (
-//   <section>
-//     <div className="product">
-//       <img
-//         src="https://i.imgur.com/EHyR2nP.png"
-//         alt="The cover of Stubborn Attachments"
-//       />
-//       <div className="description">
-//         <h3>Stubborn Attachments</h3>
-//         <h5>$20.00</h5>
-//       </div>
-//     </div>
-//     <form action="/dashboard/create-checkout-session" method="POST">
-//       <button type="submit">
-//         Checkout
-//       </button>
-//     </form>
-//   </section>
-// );
+const stripePromise = loadStripe('pk_test_51JArDsSINdHuan3mx8Xl320YXSjhnnbJhhFbuF25ddubzFr23pDdNw6rsMmTZcrISuBeHZy4dBYwM320SsXc6OfD00ki3CHXjA')
 
-// const Message = ({ message }) => (
-//   <section>
-//     <p>{message}</p>
-//   </section>
-// );
+const StrpeForm = () => {
+    const [stripeError, setStripeError] = useState();
+    const [loading, setLoading] = useState();
 
-// export default function StripeForm() {
-//   const [message, setMessage] = useState("");
+    const handleClick = async() => {
+        setLoading(true);
 
-//   useEffect(() => {
-//     // Check to see if this is a redirect back from Checkout
-//     const query = new URLSearchParams(window.location.search);
+        const stripe = stripePromise;
 
-//     if (query.get("success")) {
-//       setMessage("Order placed! You will receive an email confirmation.");
-//     }
+        const { error } =  (await stripe).redirectToCheckout({
+            lineItems : [
+                {
+                    price: 'price_1JCN3bSINdHuan3mxpZtBte5',
+                    quantity: 1
+                }
+            ],
+            mode: 'payment',
+            cancelUrl: window.location.origin,
+            successUrl: `${window.location.origin}/thankyou`,
+        });
 
-//     if (query.get("canceled")) {
-//       setMessage(
-//         "Order canceled -- continue to shop around and checkout when you're ready."
-//       );
-//     }
-//   }, []);
+        if(error){
+            setLoading(false);
+            setStripeError(error);
+        }
+    };
 
-//   return message ? (
-//     <Message message={message} />
-//   ) : (
-//     <ProductDisplay />
-//   );
-// }
+    return (
+        <>
+        {stripeError && <p style ={{color:'red'}}>{{stripeError}}</p>}
+        <button role='link' onClick={handleClick} disabled={loading}>
+            Go to Checkout
+        </button>
+        </>
+    );
+};
+
+export default StrpeForm;

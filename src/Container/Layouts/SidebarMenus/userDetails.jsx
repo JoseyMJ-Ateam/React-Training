@@ -1,19 +1,21 @@
 import { useState, useEffect } from 'react';
 import axios from '../../../axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Grid, 
           makeStyles,
           Card, 
           Typography, 
           Button, 
-          TextField, 
-          CircularProgress} from '@material-ui/core';
+          TextField,
+          CircularProgress,
+          Breadcrumbs} from '@material-ui/core';
 import {getUserDetailsBegins,
         getUserDetailsSuccess,
         getUserDetailsFail,
         updateUserDetailsSuccess,
         updateUserDetailsFail,
         updateUserDetailsBegins} from '../../../redux/actions/userDetailsAction';
+import { Link, withRouter } from 'react-router-dom';
 
         const useStyles = makeStyles(() => ({
           container: {
@@ -68,19 +70,16 @@ import {getUserDetailsBegins,
     }))
     
     const UserDetails = (props) => {
-      const [loading, setLoading] = useState(true)
       const [selectedUser, setSelectedUser] = useState({});
-      
-      
-  const dispatch = useDispatch();
-  
+      const dispatch = useDispatch();
+      const isLoading = useSelector(state => state.userDetailsReducer.isLoading)
+
 useEffect(()=>{
   dispatch(getUserDetailsBegins())
     axios.get('posts/' + props.match.params.id)
       .then(response => {
         dispatch(getUserDetailsSuccess(response.data))
         setSelectedUser(response.data);
-        setLoading(false);
       })
       .catch(error =>{
        dispatch(getUserDetailsFail(error)) 
@@ -106,12 +105,23 @@ useEffect(()=>{
 }
 
   const classes = useStyles();
-  if(loading){
+  if(isLoading){
     return  <div className={classes.loaderClass}><CircularProgress /></div>
   }
 
 
   return (
+    <>
+        <Breadcrumbs aria-label="breadcrumb">
+  <Link color="inherit" to="/dashboard/users" >
+    Users
+  </Link>
+  <p
+    color="textPrimary"
+    aria-current="page">
+    User Details
+  </p>
+</Breadcrumbs>
       <Grid 
         container 
         className={classes.container}
@@ -137,6 +147,7 @@ useEffect(()=>{
                 <Grid item className={classes.gridItem}>
                 <Typography >Title</Typography>
                     <TextField
+                    type="text"
                     id="title"
                     name="title"
                     style={{marginLeft:10}} 
@@ -153,7 +164,8 @@ useEffect(()=>{
             </Card>
             </Card>
          </Grid>
+         </>
   );
 };
 
-export default UserDetails;
+export default withRouter(UserDetails);

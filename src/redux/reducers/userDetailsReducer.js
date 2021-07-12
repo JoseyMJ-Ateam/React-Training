@@ -1,3 +1,5 @@
+import * as actions from '../constants';
+
 let initialState = {
     isLoading: false,
     users: [],
@@ -7,27 +9,27 @@ let initialState = {
 export default function userDetailsReducer(state = initialState, action) {
 
     switch (action.type) {
-        case 'GET_USER_DETAILS_DATA_BEGINS':
+        case actions.GET_USER_DETAILS_DATA_BEGINS:
             return { ...state, isLoading: true }
-        case 'GET_USER_DETAILS_DATA_SUCCESS':
+        case actions.GET_USER_DETAILS_DATA_SUCCESS:
             return {
                 ...state, isLoading: false,
                 users: action.data
             }
-        case 'GET_USER_DETAILS_DATA_FAILS':
+        case actions.GET_USER_DETAILS_DATA_FAILS:
             return { 
                 ...state, isLoading: false, 
                 errorMessgae: action.data 
             }
-        case 'UPDATE_USER_DETAILS_BEGINS':
+        case actions.UPDATE_USER_DETAILS_BEGINS:
             return { ...state, isLoading:true}
-        case 'UPDATE_USER_DETAILS_SUCCESS':
+        case actions.UPDATE_USER_DETAILS_SUCCESS:
             return {
                 ...state,
                 isLoading:false,
                 users: action.data 
             }  
-        case 'UPDATE_USER_DETAILS_FAILS' :
+        case actions.UPDATE_USER_DETAILS_FAILS :
             return {
                 ...state, isLoading:false,
                 errorMessgae:action.data

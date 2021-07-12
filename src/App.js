@@ -18,8 +18,8 @@ function App(props) {
       <Router>
         <Switch>
             
-      <Route path='/dashboard/profile' component={Profile} />
-      <Route path='/dashboard/settings' component={Settings} />
+      <Route path='/dashboard/profile'><Profile /></Route>
+      <Route path='/dashboard/settings'><Settings /></Route>
           <Route path='/dashboard'>
             {props.user ? <MainPage/> : <Redirect to="/" />}
           </Route> 

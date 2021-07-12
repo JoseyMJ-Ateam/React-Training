@@ -19,14 +19,17 @@ import { getUserDataBegins,
           userSelectedData, 
           deleteUserFail,
           deleteUserBegins} from '../../../redux/actions/userAction';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 const Users = (props) => {
-  const [loading, setLoading] = React.useState(true);
+  // const [loading, setLoading] = React.useState(true);
   const [user, setUser] = React.useState([]);
   const [page, setPage] = React.useState(1);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const dispatch = useDispatch();
+  const history = useHistory();
+  const isLoading = useSelector(state => state.userReducer.isLoading)
   const useStyles = makeStyles({
     table: {
       minWidth: '74vw',
@@ -48,7 +51,7 @@ const Users = (props) => {
       .then(response => {
         dispatch(getUserDataSuccess(response.data))
          setUser(response.data);
-        setLoading(false);
+        // setLoading(false);
       })
       .catch(error => {
         getUserDataFail(error);
@@ -75,7 +78,7 @@ const Users = (props) => {
 
   const handleView = (id) => {
     dispatch(userSelectedData());
-    props.history.push('/dashboard/users/' + id);
+    history.push('/dashboard/users/' + id);
   }
 
   const handleDelete = (id) => {
@@ -89,13 +92,12 @@ const Users = (props) => {
         console.log(error);
       });
     const deleteUser = user.filter(d => d.id !== id);
-    console.log(deleteUser);
     setUser(deleteUser)
   }
   
   const classes = useStyles();
 
-  if (loading) {
+  if (isLoading) {
     return  <div className={classes.loaderClass}><CircularProgress /></div>
   }
 

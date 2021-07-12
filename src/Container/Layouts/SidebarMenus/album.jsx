@@ -51,7 +51,6 @@ const Album = () => {
       .then(response => {
         dispatch(getAlbumDataSuccess(response))
         setAlbum(album.concat(response.data));
-        console.log(album);
         setLoading(false);       
       })
       

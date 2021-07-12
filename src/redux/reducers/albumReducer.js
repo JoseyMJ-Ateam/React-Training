@@ -1,3 +1,4 @@
+import * as actions from '../constants';
 
 let initialState = {
     isLoading: false,
@@ -9,14 +10,14 @@ let initialState = {
 export default function albumReducer(state = initialState, action) {
 
     switch (action.type) {
-        case 'GET_ALBUM_DATA_BEGINS':
+        case actions.GET_ALBUM_DATA_BEGINS:
             return { ...state, isLoading: true }
-        case 'GET_ALBUM_DATA_SUCCESS':
+        case actions.GET_ALBUM_DATA_SUCCESS:
             return {
                 ...state, isLoading: false,
                 album: action.data
             }
-        case 'GET_ALBUM_DATA_FAILS':
+        case actions.GET_ALBUM_DATA_FAILS:
             return { ...state, isLoading: false, 
                      errorMessgae: action.data }
         default:
