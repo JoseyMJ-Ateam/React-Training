@@ -9,27 +9,28 @@ import {
   TableRow,
   Paper,
   Button,
-  CircularProgress
+  CircularProgress,
+  Grid
 } from '@material-ui/core';
 import axios from '../../../axios';
-import { getUserDataBegins, 
-  getUserDataSuccess, 
-          getUserDataFail, 
-          deleteUserSuccess, 
-          userSelectedData, 
-          deleteUserFail,
-          deleteUserBegins} from '../../../redux/actions/userAction';
+import {  getPostDataBegins, 
+          getPostDataSuccess, 
+          getPostDataFail, 
+          deletePostSuccess, 
+          postSelectedData, 
+          deletePostFail,
+          deletePostBegins} from '../../../redux/actions/postAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 const Users = (props) => {
   // const [loading, setLoading] = React.useState(true);
-  const [user, setUser] = React.useState([]);
+  const [post, setPost] = React.useState([]);
   const [page, setPage] = React.useState(1);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const dispatch = useDispatch();
   const history = useHistory();
-  const isLoading = useSelector(state => state.userReducer.isLoading)
+  const isLoading = useSelector(state => state.postReducer.isLoading);
   const useStyles = makeStyles({
     table: {
       minWidth: '74vw',
@@ -46,24 +47,23 @@ const Users = (props) => {
 
   const fetchPage = (page, rowsPerPage) => {
 
-    dispatch(getUserDataBegins())
+    dispatch(getPostDataBegins())
     axios.get(`posts?_page=${page}&_limit=${rowsPerPage}`)
       .then(response => {
-        dispatch(getUserDataSuccess(response.data))
-         setUser(response.data);
-        // setLoading(false);
+        dispatch(getPostDataSuccess(response.data))
+         setPost(response.data);
       })
       .catch(error => {
-        getUserDataFail(error);
+        dispatch(getPostDataFail(error));
         console.log(error);
       })
   }
 
   useEffect(() => {
-    if (user.length === 0) {
+    if (post.length === 0) {
       fetchPage(page, rowsPerPage);
     }
-  },[page, user, rowsPerPage]);
+  },[page, post, rowsPerPage]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage + 1);
@@ -77,22 +77,22 @@ const Users = (props) => {
   };
 
   const handleView = (id) => {
-    dispatch(userSelectedData());
-    history.push('/dashboard/users/' + id);
+    dispatch(postSelectedData());
+    history.push('/dashboard/posts/' + id);
   }
 
   const handleDelete = (id) => {
-    dispatch(deleteUserBegins())
+    dispatch(deletePostBegins())
     axios.delete(`posts/${id}`)
       .then(response => {
-        dispatch(deleteUserSuccess(response));
+        dispatch(deletePostSuccess(response));
       })
       .catch(error => {
-        deleteUserFail(error);
+        dispatch(deletePostFail(error));
         console.log(error);
       });
-    const deleteUser = user.filter(d => d.id !== id);
-    setUser(deleteUser)
+    const deleteUser = post.filter(d => d.id !== id);
+    setPost(deleteUser)
   }
   
   const classes = useStyles();
@@ -102,8 +102,9 @@ const Users = (props) => {
   }
 
   return (
-    <>
+    <Grid container spacing={4}>
       <TableContainer component={Paper}>
+        <Grid item xs={12} md={3}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -114,7 +115,7 @@ const Users = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {user.map((u) => (
+            {post.map((u) => (
               <TableRow key={u.id}>
                 <TableCell >{u.id}</TableCell>
                 <TableCell>{u.title}</TableCell>
@@ -126,6 +127,7 @@ const Users = (props) => {
             ))}
           </TableBody>
         </Table>
+        </Grid>
       </TableContainer>
       <TablePagination
         rowsPerPageOptions={[5, 10, 25, 50]}
@@ -136,7 +138,7 @@ const Users = (props) => {
         rowsPerPage={rowsPerPage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
-    </>
+    </Grid>
   );
 }
 

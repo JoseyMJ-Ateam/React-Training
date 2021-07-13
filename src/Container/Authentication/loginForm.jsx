@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Grid, 
@@ -11,6 +11,7 @@ import { bindActionCreators } from 'redux';
 import {connect, useDispatch} from 'react-redux';
 import { setSnackbar } from '../../redux/reducers/snackbarReducer';
 import CustomizedSnackbars from '../Snackbar';
+
 const useStyles = makeStyles(() => ({
     container: {
       direction:"column",
@@ -85,8 +86,7 @@ const { actions} =props;
         container 
         className={classes.container}
        >
-        <Card className={classes.cardContainer}>
-          
+        <Card className={classes.cardContainer}>          
             <form onSubmit={formik.handleSubmit} className={classes.formContainer} >
                 <Grid item className={classes.gridItem} >
                     <TextField

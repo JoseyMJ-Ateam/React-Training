@@ -9,12 +9,12 @@ import { Grid,
           TextField,
           CircularProgress,
           Breadcrumbs} from '@material-ui/core';
-import {getUserDetailsBegins,
-        getUserDetailsSuccess,
-        getUserDetailsFail,
-        updateUserDetailsSuccess,
-        updateUserDetailsFail,
-        updateUserDetailsBegins} from '../../../redux/actions/userDetailsAction';
+import {getPostDetailsBegins,
+        getPostDetailsSuccess,
+        getPostDetailsFail,
+        updatePostDetailsSuccess,
+        updatePostDetailsFail,
+        updatePostDetailsBegins} from '../../../redux/actions/postDetailsAction';
 import { Link, withRouter } from 'react-router-dom';
 
         const useStyles = makeStyles(() => ({
@@ -70,38 +70,37 @@ import { Link, withRouter } from 'react-router-dom';
     }))
     
     const UserDetails = (props) => {
-      const [selectedUser, setSelectedUser] = useState({});
+      const [selectedPost, setSelectedPost] = useState({});
       const dispatch = useDispatch();
-      const isLoading = useSelector(state => state.userDetailsReducer.isLoading)
+      const isLoading = useSelector(state => state.postDetailsReducer.isLoading)
 
 useEffect(()=>{
-  dispatch(getUserDetailsBegins())
+  dispatch(getPostDetailsBegins())
     axios.get('posts/' + props.match.params.id)
       .then(response => {
-        dispatch(getUserDetailsSuccess(response.data))
-        setSelectedUser(response.data);
+        dispatch(getPostDetailsSuccess(response.data))
+        setSelectedPost(response.data);
       })
       .catch(error =>{
-       dispatch(getUserDetailsFail(error)) 
-      console.log(error)
+       dispatch(getPostDetailsFail(error));
       });
 },[])
 
   const handleUser = (e) => {
     e.preventDefault();
-    dispatch(updateUserDetailsBegins())
-    axios.put('posts/' + props.match.params.id, selectedUser)
+    dispatch(updatePostDetailsBegins())
+    axios.put('posts/' + props.match.params.id, selectedPost)
     .then(res => {
-      dispatch(updateUserDetailsSuccess(res))
+      dispatch(updatePostDetailsSuccess(res))
     })
     .catch(error =>{
-      updateUserDetailsFail(error)
+      dispatch(updatePostDetailsFail(error));
     })
 
   }
 
   const handleTitle = (e) =>{
-    setSelectedUser({...selectedUser, title: e.target.value});
+    setSelectedPost({...selectedPost, title: e.target.value});
 }
 
   const classes = useStyles();
@@ -113,13 +112,13 @@ useEffect(()=>{
   return (
     <>
         <Breadcrumbs aria-label="breadcrumb">
-  <Link color="inherit" to="/dashboard/users" >
-    Users
+  <Link color="inherit" to="/dashboard/posts" >
+    Posts
   </Link>
   <p
     color="textPrimary"
     aria-current="page">
-    User Details
+    Post Details
   </p>
 </Breadcrumbs>
       <Grid 
@@ -134,13 +133,13 @@ useEffect(()=>{
           </Card>
           <Card>
             <form className={classes.formContainer} >
-                <Typography variant="h5" className={classes.title}>{selectedUser.title} </Typography>
+                <Typography variant="h5" className={classes.title}>{selectedPost.title} </Typography>
                 <Grid item className={classes.gridItem} >
                     <Typography >Id</Typography>
                     <TextField
                     id="email"
                     name="email"   
-                    value={selectedUser.id}
+                    value={selectedPost.id}
                       style={{marginLeft:30}}           
                     />
                 </Grid>
@@ -151,7 +150,7 @@ useEffect(()=>{
                     id="title"
                     name="title"
                     style={{marginLeft:10}} 
-                    value={selectedUser.title}
+                    value={selectedPost.title}
                     onChange={handleTitle}                       
                     />
                 </Grid>

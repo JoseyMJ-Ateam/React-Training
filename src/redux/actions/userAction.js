@@ -34,9 +34,3 @@ export const deleteUserFail = (data)=>{
         data
     }
 }
-export const userSelectedData = ()=>{
-    return {
-        type: actions.USER_SELECTED,
-        
-    }
-}

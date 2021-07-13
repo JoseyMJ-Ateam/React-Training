@@ -31,6 +31,8 @@ import Dashboard from '../SidebarMenus/Dashoard';
 import clsx from 'clsx';
 import News from '../SidebarMenus/News';
 import StripeForm from '../SidebarMenus/StrpeForm';
+import StripeSuccessUrl from '../SidebarMenus/StripeSuccessUrl';
+import UserParent from '../SidebarMenus/UserComponent/UserParent';
 
 const drawerWidth = 240;
 
@@ -48,7 +50,6 @@ const useStyles = makeStyles((theme) => ({
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
@@ -124,6 +125,12 @@ function MainPage() {
     setTitle('News');      
   }
 
+  const postClick = () => {
+    
+    history.push("/dashboard/posts"); 
+    setTitle('Posts');      
+  }
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -155,9 +162,9 @@ function MainPage() {
         <ListItemIcon> <DashboardIcon /></ListItemIcon>
               <Button >Dashboard</Button>
             </ListItem>
-            <ListItem button onClick={userClick}>
+            <ListItem button onClick={postClick}>
               <ListItemIcon> <GroupIcon /></ListItemIcon>
-              <Button >Users</Button>
+              <Button >Posts</Button>
             </ListItem>
             <ListItem button onClick={albumClick}>
               <ListItemIcon> <PhotoAlbumIcon /></ListItemIcon>
@@ -166,6 +173,10 @@ function MainPage() {
             <ListItem button onClick={newsClick}>
               <ListItemIcon> <PhotoAlbumIcon /></ListItemIcon>
               <Button >News</Button>
+            </ListItem>
+            <ListItem button onClick={userClick}>
+              <ListItemIcon> <PhotoAlbumIcon /></ListItemIcon>
+              <Button >Users</Button>
             </ListItem>
             <ListItem button onClick={stripeClick}>
               <ListItemIcon> <PhotoAlbumIcon /></ListItemIcon>
@@ -213,11 +224,13 @@ function MainPage() {
         })}>
         <div className={classes.drawerHeader} />
         <Route path = '/dashboard/album' ><Album/></Route>  
+        <Route path = '/dashboard/users' ><UserParent /></Route>  
         <Route path = '/dashboard/payment' ><StripeForm /></Route>  
+        <Route path = '/dashboard/thankyou' ><StripeSuccessUrl /></Route>  
         <Route path = '/dashboard/news' ><News/></Route>  
          <Route path = '/dashboard' exact ><Dashboard /></Route>
-          <Route path = '/dashboard/users' exact ><Users /></Route>
-        <Route path='/dashboard/users/:id'><UserDetails /></Route>
+          <Route path = '/dashboard/posts' exact ><Users /></Route>
+        <Route path='/dashboard/posts/:id'><UserDetails /></Route>
       </main>
     </div>
   );

@@ -8,7 +8,6 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { useDispatch, useSelector } from 'react-redux';
 import { getNewsDataBegins, getNewsDataFail, getNewsDataSuccess } from '../../../redux/actions/newsActions';
 import axios from 'axios';
-import Index from '../../..';
 
 const News = () => {
     // const [loading, setLoading] = React.useState(true);

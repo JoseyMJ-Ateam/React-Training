@@ -2,33 +2,36 @@ import * as actions from '../constants';
 
 let initialState = {
     isLoading: false,
-    users: [],
+    posts: [],
     errorMessgae: ''
 }
 
-export default function userReducer(state = initialState, action) {
+export default function postReducer(state = initialState, action) {
 
     switch (action.type) {
-        case actions.GET_USER_DATA_BEGINS:
+        case actions.GET_POST_DATA_BEGINS:
             return { ...state, isLoading: true }
-        case actions.GET_USER_DATA_SUCCESS:
+        case actions.GET_POST_DATA_SUCCESS:
             return {
                 ...state, isLoading: false,
-                users: action.data
+                posts: action.data
             }
-        case actions.GET_USER_DATA_FAILS:
+        case actions.GET_POST_DATA_FAILS:
             return { ...state, isLoading: false, errorMessage: action.data }
-        case actions.DELETE_USER_BEGINS:
+        case actions.DELETE_POST_BEGINS:
             return { ...state, isLoading: true }
-        case actions.DELETE_USER_SUCCESS:
+        case actions.DELETE_POST_SUCCESS:
             return {
                 ...state,
                 isLoading:false,
-                users: action.data
+                posts: action.data
             }
-        case actions.DELETE_USER_FAILS:
+        case actions.DELETE_POST_FAILS:
                 return { ...state, isLoading: false, errorMessage: action.data }
-      
+        case actions.POST_SELECTED:
+            return {
+                ...state                
+            }
         default:
             return state;
     }

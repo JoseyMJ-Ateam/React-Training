@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
+import { Button } from "@material-ui/core";
 
 const stripePromise = loadStripe('pk_test_51JArDsSINdHuan3mx8Xl320YXSjhnnbJhhFbuF25ddubzFr23pDdNw6rsMmTZcrISuBeHZy4dBYwM320SsXc6OfD00ki3CHXjA')
 
@@ -33,9 +34,9 @@ const StrpeForm = () => {
     return (
         <>
         {stripeError && <p style ={{color:'red'}}>{{stripeError}}</p>}
-        <button role='link' onClick={handleClick} disabled={loading}>
+        <Button role='link' onClick={handleClick} disabled={loading} color='secondary' variant='outlined'>
             Go to Checkout
-        </button>
+        </Button>
         </>
     );
 };

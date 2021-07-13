@@ -181,8 +181,7 @@ return (
             label="Material Date Picker"
             variant="static"
             value={selectedDate}
-            onChange={handleDateChange}
-            
+            onChange={handleDateChange}            
           />
           </div>      
             </MuiPickersUtilsProvider>
