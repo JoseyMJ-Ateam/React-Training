@@ -1,5 +1,5 @@
 import React from 'react';
-import coverPic from '../../../../assets/images/profile-cover-pic.jpg';
+import coverPic from '../../assets/images/profile-cover-pic.jpg';
 import { CssBaseline, CardMedia } from '@material-ui/core';
 import TopBar from './TopBar';
 import ProfileBody from './ProfileBody';

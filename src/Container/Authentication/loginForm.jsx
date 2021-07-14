@@ -10,7 +10,7 @@ import * as authAction from '../../redux/actions/authAction';
 import { bindActionCreators } from 'redux';
 import {connect, useDispatch} from 'react-redux';
 import { setSnackbar } from '../../redux/reducers/snackbarReducer';
-import CustomizedSnackbars from '../Snackbar';
+import CustomizedSnackbars from '../../component/SnackBar/Snackbar';
 
 const useStyles = makeStyles(() => ({
     container: {

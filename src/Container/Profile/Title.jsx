@@ -1,4 +1,4 @@
-import profilePic from '../../../../assets/images/profile-pic.jpg';
+import profilePic from '../../assets/images/profile-pic.jpg';
 import { IconButton, makeStyles,Avatar, Grid, Typography } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import LocationOnIcon from '@material-ui/icons/LocationOn';

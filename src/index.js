@@ -7,7 +7,6 @@ import allReducers from './redux/reducers';
 import logger from 'redux-logger';
 import { createStore, applyMiddleware } from 'redux';
 import reportWebVitals from './reportWebVitals';
-import SocketIO from './Container/Layouts/SidebarMenus/SocketIO';
  const store = createStore(allReducers, applyMiddleware(logger)
 // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
@@ -21,6 +20,11 @@ export function Index(){
    {
      palette: {
        primary: { main: themeSelector },
+       warning: {
+                  light: '#ffb74d',
+                  main: '#ff9800',
+                  dark: '#f57c00'
+       }
      }
  })}> 
        <App />       

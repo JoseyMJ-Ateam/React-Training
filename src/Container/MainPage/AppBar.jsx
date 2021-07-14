@@ -1,9 +1,9 @@
 import React from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
+import { Toolbar,
+         IconButton,
+         MenuItem,
+         Menu } from '@material-ui/core';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { connect } from 'react-redux';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';

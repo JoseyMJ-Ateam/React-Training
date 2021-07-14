@@ -1,17 +1,8 @@
-import { Button, makeStyles, TableCell, TableRow } from "@material-ui/core";
+import { Button, TableCell, TableRow } from "@material-ui/core";
 
 
 const UserChild = (props) => {
     const users = props.users;
-
-    const useStyles = makeStyles({
-     btn :{
-      backgroundColor: 'red', 
-      color: 'white' 
-     },
-    });
-
-    const classes = useStyles();
 
     return(
         <>
@@ -21,7 +12,7 @@ const UserChild = (props) => {
                     <TableCell>{u.name}</TableCell>
                     <TableCell>{u.username}</TableCell>
                     <TableCell>{u.email}</TableCell>
-                    <TableCell><Button className={classes.btn}
+                    <TableCell><Button color='secondary' variant='contained' size='small'
                        onClick={()=>props.onClick(u.id)}>
                           Delete</Button></TableCell>
                   </TableRow>

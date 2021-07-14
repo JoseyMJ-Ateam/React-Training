@@ -9,7 +9,7 @@ import {  Button,
           Grid, 
           ListItem, 
           IconButton  } from '@material-ui/core';
-import coverPic from '../../../../assets/images/profile-cover-pic.jpg';
+import coverPic from '../../assets/images/profile-cover-pic.jpg';
 import PhoneIcon from '@material-ui/icons/Phone';
 import ChatIcon from '@material-ui/icons/Chat';
 import MailIcon from '@material-ui/icons/Mail';

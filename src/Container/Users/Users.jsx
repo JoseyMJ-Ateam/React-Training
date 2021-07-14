@@ -12,16 +12,18 @@ import {
   CircularProgress,
   Grid
 } from '@material-ui/core';
-import axios from '../../../axios';
+import axios from '../../axios';
 import {  getPostDataBegins, 
           getPostDataSuccess, 
           getPostDataFail, 
           deletePostSuccess, 
           postSelectedData, 
           deletePostFail,
-          deletePostBegins} from '../../../redux/actions/postAction';
+          deletePostBegins} from '../../redux/actions/postAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { setSnackbar } from '../../redux/reducers/snackbarReducer';
+import CustomizedSnackbars from '../../component/SnackBar/Snackbar';
 
 const Users = (props) => {
   // const [loading, setLoading] = React.useState(true);
@@ -86,9 +88,11 @@ const Users = (props) => {
     axios.delete(`posts/${id}`)
       .then(response => {
         dispatch(deletePostSuccess(response));
+        dispatch(setSnackbar(true,'success','Deleted Successfully'));
       })
       .catch(error => {
         dispatch(deletePostFail(error));
+        dispatch(setSnackbar(true,'error','Error : Not Deleted'))
         console.log(error);
       });
     const deleteUser = post.filter(d => d.id !== id);
@@ -119,9 +123,9 @@ const Users = (props) => {
               <TableRow key={u.id}>
                 <TableCell >{u.id}</TableCell>
                 <TableCell>{u.title}</TableCell>
-                <TableCell><Button style={{ backgroundColor: 'yellowgreen', color: 'white' }}
+                <TableCell><Button size='small' variant='contained'
                   onClick={() => handleView(u.id)}>Edit</Button></TableCell>
-                <TableCell><Button style={{ backgroundColor: 'red', color: 'white' }}
+                <TableCell><Button color='secondary' variant='contained' size='small'
                   onClick={() => handleDelete(u.id)}>Delete</Button></TableCell>
               </TableRow>
             ))}
@@ -129,6 +133,7 @@ const Users = (props) => {
         </Table>
         </Grid>
       </TableContainer>
+      <CustomizedSnackbars />
       <TablePagination
         rowsPerPageOptions={[5, 10, 25, 50]}
         component="div"

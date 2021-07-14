@@ -5,16 +5,16 @@ import {
   CircularProgress
 } from '@material-ui/core';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import axios from '../../../axios';
-import { useDispatch } from 'react-redux';
-import { getAlbumDataBegins, getAlbumDataSuccess } from '../../../redux/actions/albumActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { getNewsDataBegins, getNewsDataFail, getNewsDataSuccess } from '../../redux/actions/newsActions';
+import axios from 'axios';
 
-const Album = () => {
-    const [loading, setLoading] = React.useState(true);
-    const [album, setAlbum] = React.useState([]);
+const News = () => {
+    // const [loading, setLoading] = React.useState(true);
+    const [news, setNews] = React.useState([]);
     const [page, setPage] = React.useState(1);
-    const [albumClicked, setAlbumClicked]= React.useState([]);
     const dispatch = useDispatch();
+    const isLoading = useSelector(state => state.newsReducer.isLoading);
       const useStyles = makeStyles((theme) => ({
         table: {
           minWidth: '74vw',
@@ -32,36 +32,36 @@ const Album = () => {
             fontWeight:600
         },
         loaderClass: {
-          position:'absolute',
-          top:'50%',
-          left:'50%'
+        position:'absolute',
+        top:'50%',
+        left:'50%'
         }
       }));  
 
-      // const albumData = useSelector(state=>state.albumReducer.album.data);
+    //   const albumData = useSelector(state=>state.albumReducer.album.data);
+    //  console.log(albumData)
 
-        useEffect(()=>{     
-        fetchPages();
-      } ,[])   
-    
+     useEffect(()=>{     
+     fetchPages();
+  } ,[])   
      const fetchPages = () => {
        setPage(page + 1);
-      dispatch(getAlbumDataBegins());
-      axios.get(`photos?_page=${page}&_limit=10`)
+      dispatch(getNewsDataBegins());
+      axios.get(` https://newsapi.org/v2/everything?q=tesla&from=2021-07-11&sortBy=publishedAt&apiKey=a1e53f4dad6a4f50a37059fa059c2515&page=${page}&_limit=10`)
       .then(response => {
-        dispatch(getAlbumDataSuccess(response))
-        setAlbum(album.concat(response.data));
-        setLoading(false);       
+        dispatch(getNewsDataSuccess(response))
+        setNews(news.concat(response.data.articles));
+        // setLoading(false);       
+      })
+      .catch(res => {
+          dispatch(getNewsDataFail(res))
       })
       
     }
-        const handleCard = (a) => {      
-            setAlbumClicked(a);            
-        }
 
     const classes = useStyles();
 
-    if(loading){
+    if(isLoading){
       return <div className={classes.loaderClass}><CircularProgress /></div>
     }
 
@@ -69,7 +69,7 @@ const Album = () => {
         <div className={classes.root}
         >    
            <InfiniteScroll
-           dataLength= {album.length}
+           dataLength= {news.length}
            next={fetchPages}
            hasMore={true}
            loader={<h4>Loading...</h4>}
@@ -77,16 +77,14 @@ const Album = () => {
        >
            <Grid container spacing={4} >
        
-             {album.map(a => (
-                <Grid key={a.id} item xs={12} md={4} onClick={()=> handleCard(a)}>                
-                  {a.id !== albumClicked.id ?
-                      <img className={classes.img} alt="complex" src={a.url} />                
-                  :
+             {news.map((a, index) => (
+                <Grid key={index} item xs={12} md={4} >                
+                  
                     <div>
-                    <p>{a.id}</p>
+                    {/* <p>{a.index}</p> */}
                     <h1>{a.title}</h1>
                     </div> 
-}
+
              </Grid>
              ))  
 }
@@ -97,4 +95,4 @@ const Album = () => {
         </div>        
     );
 }
-export default Album;
+export default News;

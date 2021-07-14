@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from '../../../axios';
+import axios from '../../axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { Grid, 
           makeStyles,
@@ -14,53 +14,37 @@ import {getPostDetailsBegins,
         getPostDetailsFail,
         updatePostDetailsSuccess,
         updatePostDetailsFail,
-        updatePostDetailsBegins} from '../../../redux/actions/postDetailsAction';
+        updatePostDetailsBegins} from '../../redux/actions/postDetailsAction';
 import { Link, withRouter } from 'react-router-dom';
+import { setSnackbar } from '../../redux/reducers/snackbarReducer';
+import CustomizedSnackbars from '../../component/SnackBar/Snackbar';
 
         const useStyles = makeStyles(() => ({
           container: {
-            direction:"column",
-            alignItems:"center",
+            display:'flex',
             justifyContent:"center" ,
-            minHeight:450 
+            minHeight:'600px',
+            backgroundColor:'#FFFF',
+            width:'100%'
           },
           
-          cardContainer:{
-            maxWidth:600,
-            minHeight:500,
-            display:'flex',
-          },  
-          
           gridItem:{
-            marginLeft:50,
-            marginTop:50,
-            marginBottom:50,
+            padding:30,
             display:'flex',
           },
           btn: {
-      justifyContent:'center',
-      
-      position:'absolute',
-      left:150 
+            justifyContent:'center',
+            display:'flex',
+            marginTop:'20px'
     },
-    formContainer: {
-      marginTop:50,
-      minHeight:'200px',
-      maxHeight: '90vh' ,
-      position: 'relative'
-    },
-    error: {
-        color: 'red',
-        marginLeft:50
-      },
       imgContainer: {
-        margin:30,
-        display:'flex',
-        alignItems:'center'
+        width:'80%', 
+        height:'80%',
+        padding:20
       },
       title:{
-        display:'flex', 
-        maxWidth:400
+        display:'flex',
+        
       },
       loaderClass: {
         position:'absolute',
@@ -70,21 +54,22 @@ import { Link, withRouter } from 'react-router-dom';
     }))
     
     const UserDetails = (props) => {
-      const [selectedPost, setSelectedPost] = useState({});
+      const [selectedPost, setSelectedPost] = useState({title:''});
       const dispatch = useDispatch();
       const isLoading = useSelector(state => state.postDetailsReducer.isLoading)
 
-useEffect(()=>{
-  dispatch(getPostDetailsBegins())
-    axios.get('posts/' + props.match.params.id)
-      .then(response => {
-        dispatch(getPostDetailsSuccess(response.data))
-        setSelectedPost(response.data);
-      })
-      .catch(error =>{
-       dispatch(getPostDetailsFail(error));
-      });
-},[])
+      useEffect(()=>{
+        dispatch(getPostDetailsBegins())
+          axios.get('posts/' + props.match.params.id)
+            .then(response => {
+              dispatch(getPostDetailsSuccess(response.data))
+              setSelectedPost(response.data);
+            })
+            .catch(error =>{
+            dispatch(getPostDetailsFail(error));
+            dispatch(setSnackbar(true,'error','Error : Not Updated'))
+            });
+      },[])
 
   const handleUser = (e) => {
     e.preventDefault();
@@ -92,6 +77,7 @@ useEffect(()=>{
     axios.put('posts/' + props.match.params.id, selectedPost)
     .then(res => {
       dispatch(updatePostDetailsSuccess(res))
+      dispatch(setSnackbar(true, 'success', 'Updated Successfully'))
     })
     .catch(error =>{
       dispatch(updatePostDetailsFail(error));
@@ -110,8 +96,8 @@ useEffect(()=>{
 
 
   return (
-    <>
-        <Breadcrumbs aria-label="breadcrumb">
+    <Card style={{backgroundColor:'#FFFF'}}>
+        <Breadcrumbs aria-label="breadcrumb" style={{padding:'20px'}}>
   <Link color="inherit" to="/dashboard/posts" >
     Posts
   </Link>
@@ -121,37 +107,35 @@ useEffect(()=>{
     Post Details
   </p>
 </Breadcrumbs>
-      <Grid 
-        container 
-        className={classes.container}
-       >
-        <Card className={classes.cardContainer}>
-          <Card className={classes.imgContainer}>
+      <Grid container className={classes.container}>
+        <Grid item md={4}>       
             <img 
+            className={classes.imgContainer}
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvxDrCR5SfO2zzeBNLF9U9xbjlC8-ToAA68g&usqp=CAU" 
-            alt="Profile-img"  />
-          </Card>
-          <Card>
-            <form className={classes.formContainer} >
-                <Typography variant="h5" className={classes.title}>{selectedPost.title} </Typography>
+            alt="Profile-img"  />      
+          </Grid>
+            <Grid item md={8}>
+            <form >
+                <Typography variant="h5">{selectedPost.title} </Typography>
+                <Grid style={{marginTop:50}} />
                 <Grid item className={classes.gridItem} >
-                    <Typography >Id</Typography>
-                    <TextField
-                    id="email"
-                    name="email"   
-                    value={selectedPost.id}
-                      style={{marginLeft:30}}           
-                    />
+                   <TextField
+                   type="text"
+                   variant='outlined'
+                   value={selectedPost.id}
+                   label='ID'
+                   fullWidth     
+                   />
                 </Grid>
                 <Grid item className={classes.gridItem}>
-                <Typography >Title</Typography>
+               
                     <TextField
-                    type="text"
-                    id="title"
-                    name="title"
-                    style={{marginLeft:10}} 
+                    type="text" 
                     value={selectedPost.title}
-                    onChange={handleTitle}                       
+                    onChange={handleTitle} 
+                    variant='outlined'
+                    label='Title'
+                    fullWidth                           
                     />
                 </Grid>
                 <Grid item className={classes.btn}>
@@ -160,10 +144,10 @@ useEffect(()=>{
                     </Button>                   
                 </Grid>
             </form>
-            </Card>
-            </Card>
-         </Grid>
-         </>
+            <CustomizedSnackbars />
+            </Grid>
+            </Grid>
+         </Card>
   );
 };
 

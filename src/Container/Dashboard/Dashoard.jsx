@@ -3,12 +3,13 @@ import { Button, Card, CardContent, Divider, Grid, IconButton, LinearProgress, m
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 import DashboardChart from './DashboardChart';
-import LineChart from './LineChart';
+import LineChart from '../../component/LineChart/LineChart';
 
 const useStyles = makeStyles  ({
    iconBtn:{
          backgroundColor:'#3f51b5',
-         marginTop:'25px'
+         marginTop:'25px',
+         color:'white'
    },
    mrgnTop8:{
         marginTop:'8px'

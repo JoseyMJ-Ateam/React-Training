@@ -1,8 +1,10 @@
 import { CircularProgress, Grid, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "../../../../axios";
-import { deleteUserBegins, deleteUserFail, deleteUserSuccess, getUserDataBegins, getUserDataFail, getUserDataSuccess } from "../../../../redux/actions/userAction";
+import axios from "../../axios";
+import CustomizedSnackbars from "../../component/SnackBar/Snackbar";
+import { deleteUserBegins, deleteUserFail, deleteUserSuccess, getUserDataBegins, getUserDataFail, getUserDataSuccess } from "../../redux/actions/userAction";
+import { setSnackbar } from "../../redux/reducers/snackbarReducer";
 import UserChild from "./UserChild";
 
 
@@ -44,9 +46,11 @@ const UserParent = () => {
         axios.delete(`users/${id}`)
           .then(response => {
             dispatch(deleteUserSuccess(response));
+            dispatch(setSnackbar(true,'success','Deleted Successfully'))
           })
           .catch(error => {
             dispatch(deleteUserFail(error));
+            dispatch(setSnackbar(true,'error','Error : Not Deleted'))
             console.log(error);
           });
         const deleteUser = users.filter(d => d.id !== id);
@@ -77,6 +81,7 @@ const UserParent = () => {
             </Table>
             </Grid>
           </TableContainer>
+          <CustomizedSnackbars />
         </Grid>
       );
     

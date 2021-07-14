@@ -23,16 +23,17 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import PhotoAlbumIcon from '@material-ui/icons/PhotoAlbum';
-import PrimarySearchAppBar from '../MainPage/AppBar';
-import Users from '../SidebarMenus/Users';
-import Album from '../SidebarMenus/Album';
-import UserDetails from '../SidebarMenus/UserDetails';
-import Dashboard from '../SidebarMenus/Dashoard';
+import PrimarySearchAppBar from './AppBar';
+import Users from '../Users/Users';
+import Album from '../Album/Album';
+import UserDetails from '../UserDetails/UserDetails';
+import Dashboard from '../Dashboard/Dashoard';
 import clsx from 'clsx';
-import News from '../SidebarMenus/News';
-import StripeForm from '../SidebarMenus/StrpeForm';
-import StripeSuccessUrl from '../SidebarMenus/StripeSuccessUrl';
-import UserParent from '../SidebarMenus/UserComponent/UserParent';
+import News from '../News/News';
+import StripeForm from '../Stripe/StrpeForm';
+import StripeSuccessUrl from '../Stripe/StripeSuccessUrl';
+import UserParent from '../UserComponent/UserParent';
+import Settings from '../Settings';
 
 const drawerWidth = 240;
 
@@ -64,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
     
       
     }),
-    marginLeft: -drawerWidth,
+     marginLeft: -drawerWidth,
   },
   contentShift: {
     transition: theme.transitions.create('margin', {
@@ -226,6 +227,7 @@ function MainPage() {
         <Route path = '/dashboard/album' ><Album/></Route>  
         <Route path = '/dashboard/users' ><UserParent /></Route>  
         <Route path = '/dashboard/payment' ><StripeForm /></Route>  
+        <Route path='/dashboard/settings'><Settings /></Route>
         <Route path = '/dashboard/thankyou' ><StripeSuccessUrl /></Route>  
         <Route path = '/dashboard/news' ><News/></Route>  
          <Route path = '/dashboard' exact ><Dashboard /></Route>

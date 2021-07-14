@@ -2,7 +2,7 @@ import * as actions from '../constants';
 
 let initialState = {
     isLoading: false,
-    themeColor: '#000',
+    themeColor: '##891a1a',
     errorMessage: []
 }
 
