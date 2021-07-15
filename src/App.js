@@ -8,7 +8,6 @@ import {
 import {connect} from 'react-redux';
 import MainPage from "./Container/MainPage";
 import Profile from "./Container/Profile/Profile";
-import Settings from "./Container/Settings";
 
 function App(props) {
 

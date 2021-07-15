@@ -2,14 +2,17 @@ import { CircularProgress, Grid, makeStyles, Paper, Table, TableBody, TableCell,
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "../../axios";
+import ConfirmDialog from "../../component/Notifications/ConfirmDialog";
 import CustomizedSnackbars from "../../component/SnackBar/Snackbar";
 import { deleteUserBegins, deleteUserFail, deleteUserSuccess, getUserDataBegins, getUserDataFail, getUserDataSuccess } from "../../redux/actions/userAction";
+import { setNotify } from "../../redux/reducers/notifyReducer";
 import { setSnackbar } from "../../redux/reducers/snackbarReducer";
 import UserChild from "./UserChild";
 
 
 const UserParent = () => {
     const [users, setUsers] = useState([]);
+    const [dialogId, setDialogId] = useState();
     const dispatch = useDispatch();
     const useStyles = makeStyles({
         table: {
@@ -42,8 +45,13 @@ const UserParent = () => {
     },[])
 
     const handleDelete = (id) => {
-        dispatch(deleteUserBegins())
-        axios.delete(`users/${id}`)
+      dispatch(setNotify(true, 'Are you sure to delete ?'))
+      setDialogId(id);
+    }
+
+    const notify = () => {
+      dispatch(deleteUserBegins())
+        axios.delete(`users/${dialogId}`)
           .then(response => {
             dispatch(deleteUserSuccess(response));
             dispatch(setSnackbar(true,'success','Deleted Successfully'))
@@ -53,8 +61,9 @@ const UserParent = () => {
             dispatch(setSnackbar(true,'error','Error : Not Deleted'))
             console.log(error);
           });
-        const deleteUser = users.filter(d => d.id !== id);
+        const deleteUser = users.filter(d => d.id !== dialogId);
         setUsers(deleteUser)
+        dispatch(setNotify(false))
     }
 
     if (isLoading) {
@@ -81,6 +90,7 @@ const UserParent = () => {
             </Table>
             </Grid>
           </TableContainer>
+          <ConfirmDialog onClick={notify}/>
           <CustomizedSnackbars />
         </Grid>
       );

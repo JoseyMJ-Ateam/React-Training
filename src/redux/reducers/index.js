@@ -8,6 +8,7 @@ import postDetailsReducer from './postDetailsReducer';
 import colorSettingReducer from './colorSettingReducer';
 import newsReducer from './newsReducer';
 import { snackbarReducer } from './snackbarReducer';
+import { notifyReducer } from './notifyReducer';
 
 const allReducers = combineReducers({
     authReducer,
@@ -17,7 +18,8 @@ const allReducers = combineReducers({
     newsReducer,
     postDetailsReducer,
     colorSettingReducer,
-    snackbarReducer
+    snackbarReducer,
+    notifyReducer
 });
 
 export default allReducers;

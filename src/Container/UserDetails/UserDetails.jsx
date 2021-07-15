@@ -18,6 +18,8 @@ import {getPostDetailsBegins,
 import { Link, withRouter } from 'react-router-dom';
 import { setSnackbar } from '../../redux/reducers/snackbarReducer';
 import CustomizedSnackbars from '../../component/SnackBar/Snackbar';
+import ConfirmDialog from '../../component/Notifications/ConfirmDialog';
+import { setNotify } from '../../redux/reducers/notifyReducer';
 
         const useStyles = makeStyles(() => ({
           container: {
@@ -54,7 +56,7 @@ import CustomizedSnackbars from '../../component/SnackBar/Snackbar';
     }))
     
     const UserDetails = (props) => {
-      const [selectedPost, setSelectedPost] = useState({title:''});
+      const [selectedPost, setSelectedPost] = useState({id:'', title:''});
       const dispatch = useDispatch();
       const isLoading = useSelector(state => state.postDetailsReducer.isLoading)
 
@@ -73,6 +75,11 @@ import CustomizedSnackbars from '../../component/SnackBar/Snackbar';
 
   const handleUser = (e) => {
     e.preventDefault();
+    dispatch(setNotify(true, 'Are you sure to update ?'))
+
+  }
+
+  const notify = () => {
     dispatch(updatePostDetailsBegins())
     axios.put('posts/' + props.match.params.id, selectedPost)
     .then(res => {
@@ -82,7 +89,7 @@ import CustomizedSnackbars from '../../component/SnackBar/Snackbar';
     .catch(error =>{
       dispatch(updatePostDetailsFail(error));
     })
-
+    dispatch(setNotify(false))
   }
 
   const handleTitle = (e) =>{
@@ -144,6 +151,7 @@ import CustomizedSnackbars from '../../component/SnackBar/Snackbar';
                     </Button>                   
                 </Grid>
             </form>
+            <ConfirmDialog onClick={notify}/>
             <CustomizedSnackbars />
             </Grid>
             </Grid>
