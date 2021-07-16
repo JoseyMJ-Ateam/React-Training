@@ -34,6 +34,7 @@ import StripeForm from '../Stripe/StrpeForm';
 import StripeSuccessUrl from '../Stripe/StripeSuccessUrl';
 import UserParent from '../UserComponent/UserParent';
 import Settings from '../Settings';
+import Calculator from '../Calculator';
 
 const drawerWidth = 240;
 
@@ -145,6 +146,11 @@ function MainPage() {
     history.push("/dashboard"); 
   }
 
+  const handleCalculator = () => {
+    setTitle('Calculator');
+    history.push("/dashboard/calculator"); 
+  }
+
   const stripeClick = () => {
     setTitle('Payment Method');
     history.push("/dashboard/payment"); 
@@ -182,6 +188,10 @@ function MainPage() {
             <ListItem button onClick={stripeClick}>
               <ListItemIcon> <PhotoAlbumIcon /></ListItemIcon>
               <Button >Payment Form</Button>
+            </ListItem>
+            <ListItem button onClick={handleCalculator}>
+              <ListItemIcon> <PhotoAlbumIcon /></ListItemIcon>
+              <Button >Calculator</Button>
             </ListItem>
         </List>  
         </>
@@ -225,6 +235,7 @@ function MainPage() {
         })}>
         <div className={classes.drawerHeader} />
         <Route path = '/dashboard/album' ><Album/></Route>  
+        <Route path = '/dashboard/calculator' ><Calculator /></Route>  
         <Route path = '/dashboard/users' ><UserParent /></Route>  
         <Route path = '/dashboard/payment' ><StripeForm /></Route>  
         <Route path='/dashboard/settings'><Settings /></Route>
