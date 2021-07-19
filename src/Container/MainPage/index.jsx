@@ -34,7 +34,7 @@ import StripeForm from '../Stripe/StrpeForm';
 import StripeSuccessUrl from '../Stripe/StripeSuccessUrl';
 import UserParent from '../UserComponent/UserParent';
 import Settings from '../Settings';
-import Calculator from '../Calculator';
+import CalculatorApp from '../CalculatorApp';
 
 const drawerWidth = 240;
 
@@ -235,7 +235,7 @@ function MainPage() {
         })}>
         <div className={classes.drawerHeader} />
         <Route path = '/dashboard/album' ><Album/></Route>  
-        <Route path = '/dashboard/calculator' ><Calculator /></Route>  
+        <Route path = '/dashboard/calculator' ><CalculatorApp /></Route>  
         <Route path = '/dashboard/users' ><UserParent /></Route>  
         <Route path = '/dashboard/payment' ><StripeForm /></Route>  
         <Route path='/dashboard/settings'><Settings /></Route>

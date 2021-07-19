@@ -10,12 +10,11 @@ import { getNewsDataBegins, getNewsDataFail, getNewsDataSuccess } from '../../re
 import axios from 'axios';
 
 const News = () => {
-    // const [loading, setLoading] = React.useState(true);
     const [news, setNews] = React.useState([]);
     const [page, setPage] = React.useState(1);
     const dispatch = useDispatch();
     const isLoading = useSelector(state => state.newsReducer.isLoading);
-      const useStyles = makeStyles((theme) => ({
+      const useStyles = makeStyles(() => ({
         table: {
           minWidth: '74vw',
         },
@@ -39,7 +38,7 @@ const News = () => {
       }));  
 
     //   const albumData = useSelector(state=>state.albumReducer.album.data);
-    //  console.log(albumData)
+   
 
      useEffect(()=>{     
      fetchPages();
@@ -51,7 +50,7 @@ const News = () => {
       .then(response => {
         dispatch(getNewsDataSuccess(response))
         setNews(news.concat(response.data.articles));
-        // setLoading(false);       
+             
       })
       .catch(res => {
           dispatch(getNewsDataFail(res))

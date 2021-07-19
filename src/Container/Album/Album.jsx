@@ -15,7 +15,7 @@ const Album = () => {
     const [page, setPage] = React.useState(1);
     const [albumClicked, setAlbumClicked]= React.useState([]);
     const dispatch = useDispatch();
-      const useStyles = makeStyles((theme) => ({
+      const useStyles = makeStyles(() => ({
         table: {
           minWidth: '74vw',
         },
