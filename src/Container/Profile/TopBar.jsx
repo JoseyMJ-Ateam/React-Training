@@ -73,6 +73,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor:'white'
   }
 }));
+
 const TopBar = () => {
   const classes = useStyles();
 return(

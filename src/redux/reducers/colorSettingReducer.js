@@ -2,23 +2,27 @@ import * as actions from '../constants';
 
 let initialState = {
     isLoading: false,
-    themeColor: '##891a1a',
-    errorMessage: []
+    primaryColor: '##891a1a',
+    secondaryColor: '##891a1a',
+   
 }
 
 export default function colorSettingReducer(state = initialState, action) {
 
     switch (action.type) {
-        case actions.COLOR_SETTINGS_BEGINS:
-            return { ...state, isLoading: true }
-        case actions.COLOR_SETTING_SUCCESS:
-            return {
-                ...state, isLoading: false,
-                themeColor: action.data
+        case actions.SET_PRIMARY_COLOR:
+            return { 
+                ...state, 
+                isLoading: false,
+                primaryColor: action.data
             }
-        case actions.COLOR_SETTING_FAIL:
-            return { ...state, isLoading: false, errorMessage: action.data }
-       
+        case actions.SET_SECONDARY_COLOR:
+            return {
+                ...state, 
+                isLoading: false,
+                secondaryColor: action.data
+            }
+            
         default:
             return state;
     }

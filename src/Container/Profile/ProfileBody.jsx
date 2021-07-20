@@ -21,94 +21,93 @@ import {
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 
+const useStyles = makeStyles({    
+  media: {
+    height: 200,
+  },
+  cardMedia:{
+    paddingTop:'56.25%',
+    borderRadius:'10px'
+  },
+  card:{
+    height: '100%',
+    display:'flex',
+    flexDirection:'column'
+  },
+  calculatorButton:{
+    justifyContent:'center'
+  },
+ cal:{
+   borderRadius:'20px'
+  },
+  calText:{
+    fontWeight:'30px',
+    marginBottom:'70px'
+  },
+  '& .MuiTypography-h5':{
+      fontWeight:'10px'
+  },
+  calender:{
+    justifyContent:'center',
+    '& .MuiPickersBasePicker-pickerView':{
+      justifyContent:'center',
+      display:'flex',
+      alignItem:'center',
+      maxWidth:'905px'
+    },
+    '& .MuiPickersDatePickerRoot-toolbar':{
+      alignItems:'center'
+    },
+    '& .MuiPickersCalendar-week':{
+      display:'flex',
+      justifyContent:'space-around'
+    },
+    '& .MuiPickersCalendarHeader-daysHeader':{
+      justifyContent:'space-around'
+    },
+    '& .MuiTypography-caption': {
+      fontSize:'1.75rem'
+    }
+  },
+  centerItems:{
+    display:'flex',
+    justifyContent:'center',
+  },
+  gridContainer:{
+    marginTop:20
+  },
+  phoneIcon:{
+    marginRight:10
+  },
+  btn:{
+    color:'white', 
+    borderRadius:20, 
+    margin:'20px 0px'
+  },
+  starIconContainer:{
+    display:'flex', 
+    flexDirection:'column',
+    marginTop:'10px', 
+    marginLeft:'20px'
+  },
+  starIcon:{
+    color:'yellow'
+  },
+  calculatorContainer:{
+    textAlign:'center', 
+    padding:'25px',
+    borderRadius:'10px'
+  },
+});
+
 const ProfileBody = () => {
   const [selectedDate, setSelectedDate] = React.useState(new Date());
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
-  };
-
-    const useStyles = makeStyles({
-    
-        media: {
-          height: 200,
-        },
-        cardMedia:{
-          paddingTop:'56.25%',
-          borderRadius:'10px'
-        },
-        card:{
-          height: '100%',
-          display:'flex',
-          flexDirection:'column'
-        },
-        calculatorButton:{
-          justifyContent:'center'
-        },
-       cal:{
-         borderRadius:'20px'
-        },
-        calText:{
-          fontWeight:'30px',
-          marginBottom:'70px'
-        },
-        '& .MuiTypography-h5':{
-            fontWeight:'10px'
-        },
-        calender:{
-          justifyContent:'center',
-          '& .MuiPickersBasePicker-pickerView':{
-            justifyContent:'center',
-            display:'flex',
-            alignItem:'center',
-            maxWidth:'905px'
-          },
-          '& .MuiPickersDatePickerRoot-toolbar':{
-            alignItems:'center'
-          },
-          '& .MuiPickersCalendar-week':{
-            display:'flex',
-            justifyContent:'space-around'
-          },
-          '& .MuiPickersCalendarHeader-daysHeader':{
-            justifyContent:'space-around'
-          },
-          '& .MuiTypography-caption': {
-            fontSize:'1.75rem'
-          }
-        },
-        centerItems:{
-          display:'flex',
-          justifyContent:'center',
-        },
-        gridContainer:{
-          marginTop:20
-        },
-        phoneIcon:{
-          marginRight:10
-        },
-        btn:{
-          color:'white', 
-          borderRadius:20, 
-          margin:'20px 0px'
-        },
-        starIconContainer:{
-          display:'flex', 
-          flexDirection:'column',
-          marginTop:'10px', 
-          marginLeft:'20px'
-        },
-        starIcon:{
-          color:'yellow'
-        },
-        calculatorContainer:{
-          textAlign:'center', 
-          padding:'25px',
-          borderRadius:'10px'
-        },
-      });
-      
+  };      
       const classes = useStyles();
+
 return (
     <Grid container spacing={3} className={classes.gridContainer}>
       <Grid item sm={1} xs={false}  />

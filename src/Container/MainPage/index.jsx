@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AppBar, 
         CssBaseline,
         Divider,
@@ -111,26 +111,31 @@ function MainPage() {
 
   let history = useHistory();
    const userClick = () => { 
-      history.push("/dashboard/users"); 
-      setTitle('Users');     
+      history.push("/dashboard/users");
   }
+
+  useEffect(() => {
+    let title = history.location.pathname;
+    const myArr = title.split("/");
+    const newTitle = myArr[2];
+    const captital = newTitle.charAt(0).toUpperCase() + newTitle.slice(1);
+    setTitle(captital);
+  });
+
 
   const albumClick = () => {
     
     history.push("/dashboard/album"); 
-    setTitle('Album');      
   }
 
   const newsClick = () => {
     
     history.push("/dashboard/news"); 
-    setTitle('News');      
   }
 
   const postClick = () => {
     
     history.push("/dashboard/posts"); 
-    setTitle('Posts');      
   }
 
   const handleDrawerOpen = () => {
@@ -142,17 +147,14 @@ function MainPage() {
   };
 
   const handleDashboard = () => {
-    setTitle('Dashboard');
-    history.push("/dashboard"); 
+    history.push("/dashboard/dashboard"); 
   }
 
   const handleCalculator = () => {
-    setTitle('Calculator');
     history.push("/dashboard/calculator"); 
   }
 
   const stripeClick = () => {
-    setTitle('Payment Method');
     history.push("/dashboard/payment"); 
   }
 
@@ -196,6 +198,7 @@ function MainPage() {
         </List>  
         </>
   )
+  
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -213,7 +216,7 @@ function MainPage() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" color="inherit" noWrap>
-     { title || 'Dashboard'}
+     { title }
     </Typography>
           <PrimarySearchAppBar />
         </Toolbar>
@@ -241,7 +244,7 @@ function MainPage() {
         <Route path='/dashboard/settings'><Settings /></Route>
         <Route path = '/dashboard/thankyou' ><StripeSuccessUrl /></Route>  
         <Route path = '/dashboard/news' ><News/></Route>  
-         <Route path = '/dashboard' exact ><Dashboard /></Route>
+         <Route path = '/dashboard/dashboard' exact ><Dashboard /></Route>
           <Route path = '/dashboard/posts' exact ><Users /></Route>
         <Route path='/dashboard/posts/:id'><UserDetails /></Route>
       </main>

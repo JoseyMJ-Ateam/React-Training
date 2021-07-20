@@ -6,37 +6,38 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import TwitterIcon from '@material-ui/icons/Twitter';
 
+const useStyles = makeStyles((theme) => ({    
+    media: {
+      height: 230,            
+    },
+    media2:{
+        display: 'none',
+[theme.breakpoints.up('md')]: {
+        display:'block',
+        height:200,
+        width:180,
+        marginLeft:150,
+        marginTop:-100
+},
+    },
+        mainTitle:{
+        marginTop:'20px',
+        textAlign:'left',
+    [theme.breakpoints.down('sm')]: {
+        marginTop:'20px',
+        textAlign:'center',
+    },
+},
+    para:{
+        fontSize:12,
+                    
+    },
+    socialIcons:{
+        display:'flex'
+    }
+  }));
+  
 const Title = () => {
-    const useStyles = makeStyles((theme) => ({    
-        media: {
-          height: 230,            
-        },
-        media2:{
-            display: 'none',
-    [theme.breakpoints.up('md')]: {
-            display:'block',
-            height:200,
-            width:180,
-            marginLeft:150,
-            marginTop:-100
-    },
-        },
-            mainTitle:{
-            marginTop:'20px',
-            textAlign:'left',
-        [theme.breakpoints.down('sm')]: {
-            marginTop:'20px',
-            textAlign:'center',
-        },
-    },
-        para:{
-            fontSize:12,
-                        
-        },
-        socialIcons:{
-            display:'flex'
-        }
-      }));
 
       const classes = useStyles();
     return(

@@ -20,11 +20,3 @@ export const notifyReducer = (state = initialState, action) => {
   }
 };
 
-export const setNotify = (
-    notifyOpen,
-    notifyTitle = ""
-  ) => ({
-    type: actions.SET_NOTIFICATION_DIALOG,
-    notifyOpen,
-    notifyTitle
-  });

@@ -1,19 +1,14 @@
 import * as actions from '../constants';
 
-export const  colorSettingBegins =()=>{
+export const updatePrimaryColor =(data)=>{
     return {
-        type:actions.COLOR_SETTINGS_BEGINS
-    }
-}
-export const colorSettingsSuccess = (data)=>{
-    return {
-        type: actions.COLOR_SETTING_SUCCESS,
+        type:actions.SET_PRIMARY_COLOR,
         data
     }
 }
-export const colorSettingsFail = (data)=>{
+export const updateSecondaryColor = (data)=>{
     return {
-        type: actions.COLOR_SETTING_FAIL,
+        type: actions.SET_SECONDARY_COLOR,
         data
     }
 }

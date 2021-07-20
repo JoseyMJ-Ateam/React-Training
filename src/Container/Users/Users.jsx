@@ -24,11 +24,40 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { setSnackbar } from '../../redux/reducers/snackbarReducer';
 import CustomizedSnackbars from '../../component/SnackBar/Snackbar';
-import { setNotify } from '../../redux/reducers/notifyReducer';
+import { setNotify } from '../../redux/actions/notifyAction';
 import ConfirmDialog from '../../component/Notifications/ConfirmDialog';
 
-const Users = (props) => {
-  // const [loading, setLoading] = React.useState(true);
+const useStyles = makeStyles({
+  table: {
+    minWidth: '74vw',
+  },
+  tableHead: {
+    fontWeight: 600,
+  },
+  loaderClass: {
+    position:'absolute',
+    top:'50%',
+    left:'50%'
+   },
+   editBtn : {
+     backgroundColor:'blue',
+     color:'white',
+     '&:hover':{
+       color:'black',
+       backgroundColor:'blue'
+     }
+   },
+   deleteBtn : {
+    backgroundColor:'red',
+    color:'white',
+    '&:hover':{
+      backgroundColor:'red',
+      color:'black'
+    }
+  }
+});
+
+const Users = () => {
   const [post, setPost] = React.useState([]);
   const [page, setPage] = React.useState(1);
   const [dialogId, setDialogId] = React.useState();
@@ -36,19 +65,6 @@ const Users = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const isLoading = useSelector(state => state.postReducer.isLoading);
-  const useStyles = makeStyles({
-    table: {
-      minWidth: '74vw',
-    },
-    tableHead: {
-      fontWeight: 600,
-    },
-    loaderClass: {
-      position:'absolute',
-      top:'50%',
-      left:'50%'
-     }
-  });
 
   const fetchPage = (page, rowsPerPage) => {
 
@@ -134,8 +150,8 @@ const Users = (props) => {
                 <TableCell >{u.id}</TableCell>
                 <TableCell>{u.title}</TableCell>
                 <TableCell><Button size='small' variant='contained'
-                  onClick={() => handleView(u.id)}>Edit</Button></TableCell>
-                <TableCell><Button color='secondary' variant='contained' size='small'
+                  onClick={() => handleView(u.id)} className={classes.editBtn}>Edit</Button></TableCell>
+                <TableCell><Button className={classes.deleteBtn} variant='contained' size='small'
                   onClick={() => handleDelete(u.id)}>Delete</Button></TableCell>
               </TableRow>
             ))}
@@ -143,7 +159,7 @@ const Users = (props) => {
         </Table>
         </Grid>
       </TableContainer>
-            <ConfirmDialog onClick={notify}/>
+            <ConfirmDialog onConfirm={notify}/>
       <CustomizedSnackbars  />
       <TablePagination
         rowsPerPageOptions={[5, 10, 25, 50]}

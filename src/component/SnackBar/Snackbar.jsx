@@ -21,7 +21,7 @@ const CustomizedSnackbars = () => {
   const snackbarType = useSelector(state => state.snackbarReducer.snackbarType);
   const snackbarMessage = useSelector(state => state.snackbarReducer.snackbarMessage);
   const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
+    if (reason === "backdropClick") {
       return;
     }
     dispatch(setSnackbar(false, snackbarType, snackbarMessage));

@@ -12,19 +12,17 @@ import reportWebVitals from './reportWebVitals';
 );
 
 export function Index(){
-  const themeSelector = useSelector(state => state.colorSettingReducer.themeColor);
+  const primaryColor = useSelector(state => state.colorSettingReducer.primaryColor);
+  const secondaryColor = useSelector(state => state.colorSettingReducer.secondaryColor);
  
   return (
      
     <ThemeProvider theme={createMuiTheme(
    {
      palette: {
-       primary: { main: themeSelector },
-       warning: {
-                  light: '#ffb74d',
-                  main: '#ff9800',
-                  dark: '#f57c00'
-       }
+       primary: { main: primaryColor},
+       secondary: { main: secondaryColor },
+      
      }
  })}> 
        <App />       

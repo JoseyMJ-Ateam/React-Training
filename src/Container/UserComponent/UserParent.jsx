@@ -5,28 +5,36 @@ import axios from "../../axios";
 import ConfirmDialog from "../../component/Notifications/ConfirmDialog";
 import CustomizedSnackbars from "../../component/SnackBar/Snackbar";
 import { deleteUserBegins, deleteUserFail, deleteUserSuccess, getUserDataBegins, getUserDataFail, getUserDataSuccess } from "../../redux/actions/userAction";
-import { setNotify } from "../../redux/reducers/notifyReducer";
+import { setNotify } from "../../redux/actions/notifyAction";
 import { setSnackbar } from "../../redux/reducers/snackbarReducer";
 import UserChild from "./UserChild";
 
+const useStyles = makeStyles({
+    table: {
+      minWidth: '74vw',
+    },
+    tableHead: {
+      fontWeight: 600,
+    },
+    loaderClass: {
+      position:'absolute',
+      top:'50%',
+      left:'50%'
+     },
+     deleteBtn : {
+      backgroundColor:'red',
+      color:'white',
+      '&:hover':{
+        backgroundColor:'red',
+        color:'black'
+      }
+    }
+  });
 
 const UserParent = () => {
     const [users, setUsers] = useState([]);
     const [dialogId, setDialogId] = useState();
     const dispatch = useDispatch();
-    const useStyles = makeStyles({
-        table: {
-          minWidth: '74vw',
-        },
-        tableHead: {
-          fontWeight: 600,
-        },
-        loaderClass: {
-          position:'absolute',
-          top:'50%',
-          left:'50%'
-         }
-      });
 
   const isLoading = useSelector(state => state.userReducer.isLoading);
       
@@ -90,7 +98,7 @@ const UserParent = () => {
             </Table>
             </Grid>
           </TableContainer>
-          <ConfirmDialog onClick={notify}/>
+          <ConfirmDialog onConfirm={notify}/>
           <CustomizedSnackbars />
         </Grid>
       );

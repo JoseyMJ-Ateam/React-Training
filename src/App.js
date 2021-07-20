@@ -1,4 +1,4 @@
-import LoginForm from "./Container/Authentication/loginForm";
+import LoginForm from "./Container/Authentication/LoginForm";
 import {
   BrowserRouter as Router,
   Switch,
@@ -23,7 +23,7 @@ function App(props) {
           </Route> 
     <Route path = '/'>
             {props.user ? (
-              <Redirect to = '/dashboard' />
+              <Redirect to = '/dashboard/dashboard' />
             ) : (
               <LoginForm />
             )}

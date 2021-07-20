@@ -10,9 +10,7 @@ const StrpeForm = () => {
 
     const handleClick = async() => {
         setLoading(true);
-
         const stripe = stripePromise;
-
         const { error } =  (await stripe).redirectToCheckout({
             lineItems : [
                 {

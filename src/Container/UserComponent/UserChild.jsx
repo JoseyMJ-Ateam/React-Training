@@ -13,7 +13,7 @@ const UserChild = (props) => {
                     <TableCell>{u.username}</TableCell>
                     <TableCell>{u.email}</TableCell>
                     <TableCell><Button color='secondary' variant='contained' size='small'
-                       onClick={()=>props.onClick(u.id)}>
+                       onClick={()=>props.onClick(u.id)} >
                           Delete</Button></TableCell>
                   </TableRow>
                 ))}

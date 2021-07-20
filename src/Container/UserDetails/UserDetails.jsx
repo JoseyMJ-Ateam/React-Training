@@ -19,7 +19,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { setSnackbar } from '../../redux/reducers/snackbarReducer';
 import CustomizedSnackbars from '../../component/SnackBar/Snackbar';
 import ConfirmDialog from '../../component/Notifications/ConfirmDialog';
-import { setNotify } from '../../redux/reducers/notifyReducer';
+import { setNotify } from '../../redux/actions/notifyAction';
 
         const useStyles = makeStyles(() => ({
           container: {
@@ -151,7 +151,7 @@ import { setNotify } from '../../redux/reducers/notifyReducer';
                     </Button>                   
                 </Grid>
             </form>
-            <ConfirmDialog onClick={notify}/>
+            <ConfirmDialog onConfirm={notify}/>
             <CustomizedSnackbars />
             </Grid>
             </Grid>

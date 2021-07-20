@@ -9,34 +9,35 @@ import axios from '../../axios';
 import { useDispatch } from 'react-redux';
 import { getAlbumDataBegins, getAlbumDataSuccess } from '../../redux/actions/albumActions';
 
+const useStyles = makeStyles(() => ({
+  table: {
+    minWidth: '74vw',
+  },
+  root: {
+    flexGrow: 1,
+  },
+  img: {
+    margin: 'auto',
+    display: 'block',
+    maxWidth: '100%',
+    maxHeight: '100%',
+  },
+  tableHead:{           
+      fontWeight:600
+  },
+  loaderClass: {
+    position:'absolute',
+    top:'50%',
+    left:'50%'
+  }
+}));  
+
 const Album = () => {
     const [loading, setLoading] = React.useState(true);
     const [album, setAlbum] = React.useState([]);
     const [page, setPage] = React.useState(1);
     const [albumClicked, setAlbumClicked]= React.useState([]);
     const dispatch = useDispatch();
-      const useStyles = makeStyles(() => ({
-        table: {
-          minWidth: '74vw',
-        },
-        root: {
-          flexGrow: 1,
-        },
-        img: {
-          margin: 'auto',
-          display: 'block',
-          maxWidth: '100%',
-          maxHeight: '100%',
-        },
-        tableHead:{           
-            fontWeight:600
-        },
-        loaderClass: {
-          position:'absolute',
-          top:'50%',
-          left:'50%'
-        }
-      }));  
 
       // const albumData = useSelector(state=>state.albumReducer.album.data);
 

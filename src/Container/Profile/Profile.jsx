@@ -6,13 +6,13 @@ import ProfileBody from './ProfileBody';
 import { makeStyles } from '@material-ui/core/styles';
 import Title from './Title';
 
+const useStyles = makeStyles({
+  media: {
+    height: 200,
+  },
+});
+
 const Profile = () => {
-  const useStyles = makeStyles({
-    
-    media: {
-      height: 200,
-    },
-  });
   
   const classes = useStyles();
   return(

@@ -9,33 +9,34 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getNewsDataBegins, getNewsDataFail, getNewsDataSuccess } from '../../redux/actions/newsActions';
 import axios from 'axios';
 
+const useStyles = makeStyles(() => ({
+  table: {
+    minWidth: '74vw',
+  },
+  root: {
+    flexGrow: 1,
+  },
+  img: {
+    margin: 'auto',
+    display: 'block',
+    maxWidth: '100%',
+    maxHeight: '100%',
+  },
+  tableHead:{           
+      fontWeight:600
+  },
+  loaderClass: {
+  position:'absolute',
+  top:'50%',
+  left:'50%'
+  }
+}));  
+
 const News = () => {
     const [news, setNews] = React.useState([]);
     const [page, setPage] = React.useState(1);
     const dispatch = useDispatch();
     const isLoading = useSelector(state => state.newsReducer.isLoading);
-      const useStyles = makeStyles(() => ({
-        table: {
-          minWidth: '74vw',
-        },
-        root: {
-          flexGrow: 1,
-        },
-        img: {
-          margin: 'auto',
-          display: 'block',
-          maxWidth: '100%',
-          maxHeight: '100%',
-        },
-        tableHead:{           
-            fontWeight:600
-        },
-        loaderClass: {
-        position:'absolute',
-        top:'50%',
-        left:'50%'
-        }
-      }));  
 
     //   const albumData = useSelector(state=>state.albumReducer.album.data);
    
@@ -71,26 +72,20 @@ const News = () => {
            dataLength= {news.length}
            next={fetchPages}
            hasMore={true}
-           loader={<h4>Loading...</h4>}
-          
+           loader={<h4>Loading...</h4>}          
        >
-           <Grid container spacing={4} >
-       
+           <Grid container spacing={4} >       
              {news.map((a, index) => (
-                <Grid key={index} item xs={12} md={4} >                
-                  
+                <Grid key={index} item xs={12} md={4} >                            
                     <div>
-                    {/* <p>{a.index}</p> */}
                     <h1>{a.title}</h1>
                     </div> 
-
              </Grid>
              ))  
 }
   
            </Grid>
-             </InfiniteScroll>
-        
+             </InfiniteScroll>        
         </div>        
     );
 }
