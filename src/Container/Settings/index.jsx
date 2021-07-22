@@ -3,15 +3,15 @@
  import { updatePrimaryColor } from '../../redux/actions/colorSettingsActions';
  import { updateSecondaryColor } from '../../redux/actions/colorSettingsActions';
  import React, { useState } from "react";
- import { makeStyles, Typography } from '@material-ui/core';
+ import { Grid, makeStyles, Paper, Typography } from '@material-ui/core';
 
  const useStyles = makeStyles({
-   divStyle : {
-    display:'flex', 
-    justifyContent:'space-around', 
-    width:'30%', 
+   container:{
+    padding:'25px',
+   },
+   divStyle : { 
     marginTop:'20px'
-   }
+   },
   })
 
 const Settings = () => {
@@ -33,15 +33,25 @@ const Settings = () => {
 
   return (
     <>
+    <Grid container spacing={1} component={Paper} className={classes.container}>
     <Typography variant='h3'>Change Theme</Typography>
-    <div className={classes.divStyle}>
+      <Grid item container className={classes.divStyle}>
+      <Grid item md={3}>
       <Typography variant='h5'>Primary Colour</Typography> 
+      </Grid>
+      <Grid item md={2}>
       <input type='color' onChange={handlePrimaryColor} value={primaryColor} />
-    </div>
-    <div className={classes.divStyle}>
+      </Grid>
+      </Grid>
+      <Grid item container>
+      <Grid item md={3}>
       <Typography variant='h5'>Secondary Colour</Typography> 
+      </Grid>
+      <Grid item md={2}>
       <input type='color' onChange={handleSecondaryColor} value={secondaryColor} />
-    </div>
+      </Grid>
+      </Grid>
+    </Grid>
     </>
   );
 }

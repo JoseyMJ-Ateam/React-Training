@@ -110,9 +110,6 @@ function MainPage() {
   const theme = useTheme();
 
   let history = useHistory();
-   const userClick = () => { 
-      history.push("/dashboard/users");
-  }
 
   useEffect(() => {
     let title = history.location.pathname;
@@ -122,20 +119,8 @@ function MainPage() {
     setTitle(captital);
   });
 
-
-  const albumClick = () => {
-    
-    history.push("/dashboard/album"); 
-  }
-
-  const newsClick = () => {
-    
-    history.push("/dashboard/news"); 
-  }
-
-  const postClick = () => {
-    
-    history.push("/dashboard/posts"); 
+  const handleClick = (type) => {
+    history.push(`/dashboard/${type}`)
   }
 
   const handleDrawerOpen = () => {
@@ -146,18 +131,6 @@ function MainPage() {
     setOpen(false);
   };
 
-  const handleDashboard = () => {
-    history.push("/dashboard/dashboard"); 
-  }
-
-  const handleCalculator = () => {
-    history.push("/dashboard/calculator"); 
-  }
-
-  const stripeClick = () => {
-    history.push("/dashboard/payment"); 
-  }
-
   const drawer = (
     <>
     <div className={classes.drawerHeader}>
@@ -167,31 +140,31 @@ function MainPage() {
         </div>
         <Divider />
         <List>  
-        <ListItem button onClick={handleDashboard}>
+        <ListItem button onClick={()=>handleClick('dashboard')}>
         <ListItemIcon> <DashboardIcon /></ListItemIcon>
               <Button >Dashboard</Button>
             </ListItem>
-            <ListItem button onClick={postClick}>
+            <ListItem button onClick={()=>handleClick('posts')}>
               <ListItemIcon> <GroupIcon /></ListItemIcon>
               <Button >Posts</Button>
             </ListItem>
-            <ListItem button onClick={albumClick}>
+            <ListItem button onClick={()=>handleClick('album')}>
               <ListItemIcon> <PhotoAlbumIcon /></ListItemIcon>
               <Button >Album</Button>
             </ListItem>
-            <ListItem button onClick={newsClick}>
+            <ListItem button onClick={()=>handleClick('news')}>
               <ListItemIcon> <PhotoAlbumIcon /></ListItemIcon>
               <Button >News</Button>
             </ListItem>
-            <ListItem button onClick={userClick}>
+            <ListItem button onClick={()=>handleClick('users')}>
               <ListItemIcon> <PhotoAlbumIcon /></ListItemIcon>
               <Button >Users</Button>
             </ListItem>
-            <ListItem button onClick={stripeClick}>
+            <ListItem button onClick={()=>handleClick('payment')}>
               <ListItemIcon> <PhotoAlbumIcon /></ListItemIcon>
               <Button >Payment Form</Button>
             </ListItem>
-            <ListItem button onClick={handleCalculator}>
+            <ListItem button onClick={()=>handleClick('calculator')}>
               <ListItemIcon> <PhotoAlbumIcon /></ListItemIcon>
               <Button >Calculator</Button>
             </ListItem>
