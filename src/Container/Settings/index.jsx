@@ -36,18 +36,18 @@ const Settings = () => {
     <Grid container spacing={1} component={Paper} className={classes.container}>
     <Typography variant='h3'>Change Theme</Typography>
       <Grid item container className={classes.divStyle}>
-      <Grid item md={3}>
+      <Grid item md={3} sm={6} xs={12}>
       <Typography variant='h5'>Primary Colour</Typography> 
       </Grid>
-      <Grid item md={2}>
+      <Grid item md={2} sm={6} xs={12}>
       <input type='color' onChange={handlePrimaryColor} value={primaryColor} />
       </Grid>
       </Grid>
       <Grid item container>
-      <Grid item md={3}>
+      <Grid item md={3} sm={6} xs={12}>
       <Typography variant='h5'>Secondary Colour</Typography> 
       </Grid>
-      <Grid item md={2}>
+      <Grid item md={2} sm={6} xs={12}>
       <input type='color' onChange={handleSecondaryColor} value={secondaryColor} />
       </Grid>
       </Grid>

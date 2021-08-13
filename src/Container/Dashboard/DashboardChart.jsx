@@ -1,22 +1,35 @@
-
+import React, {useEffect} from 'react';
 import { Bar } from 'react-chartjs-2';   
 import {
   Divider,
   colors
 } from '@material-ui/core';
+import axios from 'axios';
 
 const DashboardChart = () => {
-  const data = {
-    datasets: [
-      {
-        backgroundColor: colors.indigo[500],
-        data: [18, 5, 19, 27, 29, 19, 20, 32,25,17],
-        label: 'This year',
-        barThickness:10
-      },
-    ],
-    labels: ['1 Aug', '2 Aug', '3 Aug', '4 Aug', '5 Aug', '6 Aug', '6 Aug', '6 Aug', '6 Aug'],
-  }; 
+
+  const [data, setData] = React.useState([]);
+
+      useEffect(()=>{     
+        axios.get(`https://api.coincap.io/v2/assets/?limit=5`)
+        .then(response => {
+          const res = response.data
+          setData({
+
+            datasets: [
+              {
+                backgroundColor: colors.indigo[500],
+                data: res.data.map((crypto) => crypto.priceUsd),
+                label: 'This year',
+                barThickness:10
+              },
+            ],
+            labels: res.data.map((crypto) => crypto.name),
+          })
+          
+        })
+    } ,[])   
+  
 
   return (
       <>
